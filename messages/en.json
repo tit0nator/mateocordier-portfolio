@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Mateo Cordier",
+    "description": "Websites and AI videos. Out of Lyon."
+  },
+  "menubar": {
+    "ownerName": "Mateo",
+    "nowPlaying": "Frank Ocean — Pyramids"
+  },
+  "dock": {
+    "finder": "Finder",
+    "safari": "Safari",
+    "higgsfield": "Higgsfield",
+    "preview": "Preview",
+    "cursor": "Cursor",
+    "mail": "Mail",
+    "notes": "Notes",
+    "resume": "Resume"
+  }
+}

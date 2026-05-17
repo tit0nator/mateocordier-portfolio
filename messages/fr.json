@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "title": "Mateo Cordier",
+    "description": "Sites web et vidéos IA. Depuis Lyon."
+  },
+  "menubar": {
+    "ownerName": "Mateo",
+    "nowPlaying": "Frank Ocean — Pyramids"
+  },
+  "dock": {
+    "finder": "Finder",
+    "safari": "Safari",
+    "higgsfield": "Higgsfield",
+    "preview": "Preview",
+    "cursor": "Cursor",
+    "mail": "Mail",
+    "notes": "Notes",
+    "resume": "Resume"
+  }
+}
