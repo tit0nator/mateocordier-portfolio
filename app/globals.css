@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Make dark: utilities respond to the .dark class on <html>, not media query.
+   The media query below is still used for CSS variables (fallback for no-JS). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Light (default) ─────────────────────────────── */
 :root {
   --background: #f5f5f7;
   --foreground: #1d1d1f;
@@ -9,9 +14,20 @@
   --dock-border: rgba(0, 0, 0, 0.08);
 }
 
+/* ── Dark via .dark class (explicit toggle) ──────── */
+:root.dark {
+  --background: #111113;
+  --foreground: #f5f5f7;
+  --menubar-bg: rgba(20, 20, 22, 0.72);
+  --menubar-fg: #f5f5f7;
+  --dock-bg: rgba(28, 28, 30, 0.55);
+  --dock-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Dark via system preference (no class set yet) ── */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
+  :root:not(.dark):not(.light) {
+    --background: #111113;
     --foreground: #f5f5f7;
     --menubar-bg: rgba(20, 20, 22, 0.72);
     --menubar-fg: #f5f5f7;

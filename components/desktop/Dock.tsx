@@ -73,7 +73,7 @@ export function Dock() {
             >
               <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
             </button>
-            <span className="pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black/80 px-2 py-1 text-[11px] text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100 dark:bg-white/90 dark:text-black">
+            <span className="pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black/80 px-2 py-1 text-[11px] text-white opacity-0 transition-opacity delay-0 duration-150 group-hover:opacity-100 group-hover:delay-[200ms] dark:bg-white/90 dark:text-black">
               {t(labelKey)}
             </span>
           </li>

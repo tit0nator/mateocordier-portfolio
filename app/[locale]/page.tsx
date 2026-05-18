@@ -1,5 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
-import { Desktop } from "@/components/desktop/Desktop";
+import { RootView } from "@/components/RootView";
 
 export default async function Home({
   params,
@@ -8,5 +8,5 @@ export default async function Home({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <Desktop />;
+  return <RootView />;
 }

@@ -37,6 +37,10 @@ export function Window({ window: w, title, children }: WindowProps) {
       dragListener={false}
       dragControls={dragControls}
       onDragEnd={() => moveWindow(w.id, { x: x.get(), y: y.get() })}
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
       style={{
         x,
         y,
@@ -46,7 +50,7 @@ export function Window({ window: w, title, children }: WindowProps) {
         position: "absolute",
       }}
       onPointerDown={() => focusWindow(w.id)}
-      className={`overflow-hidden rounded-xl border backdrop-blur-xl shadow-2xl transition-opacity ${
+      className={`overflow-hidden rounded-xl border backdrop-blur-xl shadow-2xl ${
         isFocused
           ? "border-black/15 dark:border-white/15"
           : "border-black/8 dark:border-white/10 opacity-95"

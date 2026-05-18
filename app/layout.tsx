@@ -8,9 +8,17 @@ export const metadata: Metadata = {
   description: "Sites web et vidéos IA. Depuis Lyon.",
 };
 
-// Next 16 requires <html> and <body> in the root layout. The next-intl middleware
-// sets a NEXT_LOCALE cookie on every request, so we read it here to set the
-// correct lang attribute (avoids hydration mismatches between /fr and /en).
+// Runs before React hydrates — sets .dark/.light on <html> and data-mobile
+// so the first paint matches the user's preference (no flash).
+const antiFlashScript = `(function(){
+  var t=localStorage.getItem('theme');
+  var dark=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+  document.documentElement.classList.add(dark?'dark':'light');
+  if(window.matchMedia('(max-width: 767px)').matches){
+    document.documentElement.setAttribute('data-mobile','1');
+  }
+})();`;
+
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -23,6 +31,10 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script dangerouslySetInnerHTML={{ __html: antiFlashScript }} />
+      </head>
       <body className="h-full">{children}</body>
     </html>
   );

@@ -10,6 +10,8 @@ export function AutoOpen() {
   const windowsLength = useWindowStore((s) => s.windows.length);
 
   useEffect(() => {
+    // Don't auto-open on mobile — MobileLayout handles its own home state.
+    if (window.matchMedia("(max-width: 767px)").matches) return;
     if (windowsLength === 0) {
       openApp("notes", { position: { x: 60, y: 60 } });
       openApp("safari", { position: { x: 320, y: 50 } });
