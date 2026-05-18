@@ -22,6 +22,18 @@
       "hello": "Hey, glad you're here.",
       "intro": "I'm Mateo. I build websites and make AI videos, based in Lyon, France. Usually for brands that want something that doesn't look like a template. Also for my own projects — Surge, RÉSERVE.",
       "invite": "Make yourself at home, open the folders, watch the videos. If you want to chat, Mail.app is in the dock — I answer fast, promise."
+    },
+    "finder": {
+      "folders": {
+        "selected": "Selected Work",
+        "lab": "Lab",
+        "decks": "Decks"
+      },
+      "back": "← Back",
+      "visit": "Visit site",
+      "play": "Play video",
+      "openDeck": "Open deck",
+      "noPreview": "Preview soon"
     }
   }
 }

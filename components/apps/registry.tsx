@@ -2,10 +2,11 @@
 
 import type { AppId } from "@/lib/store";
 import { Notes } from "./Notes";
+import { Finder } from "./Finder";
 
 type AppEntry = {
   Component: React.ComponentType;
-  // Translation key under "apps.<id>.title" — used for the window title bar.
+  // Translation key under "dock.<id>" — used for the window title bar.
   titleKey: string;
 };
 
@@ -22,7 +23,7 @@ const make = (name: string) => () => <Placeholder name={name} />;
 
 export const APP_REGISTRY: Partial<Record<AppId, AppEntry>> = {
   notes: { Component: Notes, titleKey: "notes" },
-  finder: { Component: make("Finder"), titleKey: "finder" },
+  finder: { Component: Finder, titleKey: "finder" },
   safari: { Component: make("Safari"), titleKey: "safari" },
   higgsfield: { Component: make("Higgsfield"), titleKey: "higgsfield" },
   preview: { Component: make("Preview"), titleKey: "preview" },
