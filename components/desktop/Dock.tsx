@@ -11,10 +11,11 @@ import {
   Download,
   type LucideIcon,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { useWindowStore, type AppId } from "@/lib/store";
 
 type DockApp = {
-  id: string;
+  id: AppId;
   labelKey: string;
   Icon: LucideIcon;
 };
@@ -32,6 +33,23 @@ const DOCK_APPS: DockApp[] = [
 
 export function Dock() {
   const t = useTranslations("dock");
+  const locale = useLocale();
+  const openApp = useWindowStore((s) => s.openApp);
+
+  function handleClick(id: AppId) {
+    if (id === "resume") {
+      // Resume is a download trigger — serve the FR or EN PDF based on active locale.
+      const filename = `Resume-Mateo-Cordier-${locale.toUpperCase()}.pdf`;
+      const link = document.createElement("a");
+      link.href = `/${filename}`;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      return;
+    }
+    openApp(id);
+  }
 
   return (
     <nav
@@ -50,6 +68,7 @@ export function Dock() {
             <button
               type="button"
               aria-label={t(labelKey)}
+              onClick={() => handleClick(id)}
               className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/70 transition-transform duration-150 hover:-translate-y-1 hover:scale-105 active:scale-95 dark:bg-zinc-800/70"
             >
               <Icon size={22} strokeWidth={1.5} aria-hidden="true" />

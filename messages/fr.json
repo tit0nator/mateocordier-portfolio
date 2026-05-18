@@ -16,5 +16,12 @@
     "mail": "Mail",
     "notes": "Notes",
     "resume": "Resume"
+  },
+  "apps": {
+    "notes": {
+      "hello": "Hey, content que tu sois là.",
+      "intro": "Moi c'est Mateo. Je construis des sites web et je fais des vidéos en IA depuis Lyon. Souvent pour des marques qui veulent quelque chose qui ressemble pas à un template. Aussi pour mes projets en propre — Surge, RÉSERVE.",
+      "invite": "Fais-toi plaisir, ouvre les dossiers, regarde les vidéos. Si t'as envie de me parler, le Mail.app est dans la dock — je réponds vite, promis."
+    }
   }
 }

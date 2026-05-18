@@ -21,6 +21,9 @@ export async function generateMetadata({
   };
 }
 
+// No <html>/<body> here — they live in the root layout (Next 16 requirement).
+// This layout's job is to bind the locale into the next-intl runtime so
+// useTranslations works in all descendants.
 export default async function LocaleLayout({
   children,
   params,
@@ -35,12 +38,8 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="h-full antialiased">
-      <body className="h-full">
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      {children}
+    </NextIntlClientProvider>
   );
 }
