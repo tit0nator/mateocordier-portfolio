@@ -1,6 +1,7 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { ExternalLink, Lock } from "lucide-react";
 
 const SITES: Record<string, { label: string; url: string; hero: string }> = {
   bodyspirit: {
@@ -10,7 +11,7 @@ const SITES: Record<string, { label: string; url: string; hero: string }> = {
   },
 };
 
-export function Safari() {
+export function Safari(_: { windowId: string }) {
   const site = SITES["bodyspirit"];
 
   return (
@@ -22,6 +23,7 @@ export function Safari() {
           {["←", "→"].map((ch) => (
             <span
               key={ch}
+              aria-hidden="true"
               className="flex h-5 w-5 items-center justify-center rounded text-[11px] text-zinc-400 dark:text-zinc-500"
             >
               {ch}
@@ -31,7 +33,7 @@ export function Safari() {
 
         {/* URL bar */}
         <div className="flex flex-1 items-center gap-1.5 rounded-md bg-white px-2.5 py-0.5 text-[11px] text-zinc-500 shadow-inner dark:bg-zinc-700 dark:text-zinc-400">
-          <span className="text-green-500">🔒</span>
+          <Lock size={10} className="text-green-500 shrink-0" aria-hidden="true" />
           <span className="truncate">{site.label}</span>
         </div>
 
@@ -49,11 +51,13 @@ export function Safari() {
 
       {/* Screenshot */}
       <div className="relative flex-1 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={site.hero}
           alt="Body & Spirit website screenshot"
-          className="h-full w-full object-cover object-top"
+          fill
+          className="object-cover object-top"
+          sizes="720px"
+          priority
         />
       </div>
     </div>

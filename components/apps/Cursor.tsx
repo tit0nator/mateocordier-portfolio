@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FileCode2, Folder } from "lucide-react";
-import { codeToHtml } from "shiki";
+import { createHighlighter, type Highlighter } from "shiki";
 
 const SOURCE_FILES: { name: string; lang: "tsx" | "ts" }[] = [
   { name: "Window.tsx", lang: "tsx" },
@@ -11,7 +11,19 @@ const SOURCE_FILES: { name: string; lang: "tsx" | "ts" }[] = [
   { name: "Desktop.tsx", lang: "tsx" },
 ];
 
-// Snapshots live in content/source/ — served as plain text via a route.
+// Module-level singleton — created once, reused across all renders and file switches.
+let _highlighterPromise: Promise<Highlighter> | null = null;
+function getHighlighter(): Promise<Highlighter> {
+  if (!_highlighterPromise) {
+    _highlighterPromise = createHighlighter({
+      themes: ["vitesse-dark"],
+      langs: ["tsx", "typescript"],
+    });
+  }
+  return _highlighterPromise;
+}
+
+// Snapshots live in content/source/ — served as plain text via /source/[file] route.
 async function fetchSource(name: string): Promise<string> {
   const res = await fetch(`/source/${name}`);
   if (!res.ok) throw new Error(`Failed to load ${name}`);
@@ -31,12 +43,9 @@ export function Cursor(_: { windowId: string }) {
     const entry = SOURCE_FILES.find((f) => f.name === activeFile);
     if (!entry) return;
 
-    fetchSource(entry.name)
-      .then((code) =>
-        codeToHtml(code, {
-          lang: entry.lang,
-          theme: "vitesse-dark",
-        })
+    Promise.all([getHighlighter(), fetchSource(entry.name)])
+      .then(([hl, code]) =>
+        hl.codeToHtml(code, { lang: entry.lang, theme: "vitesse-dark" })
       )
       .then((result) => {
         if (!cancelled) {
@@ -57,9 +66,9 @@ export function Cursor(_: { windowId: string }) {
   }, [activeFile]);
 
   return (
-    <div className="flex h-full bg-[#1e1e1e] text-zinc-100 font-mono text-[12px]">
+    <div className="flex h-full bg-[#1e1e1e] font-mono text-[12px] text-zinc-100">
       {/* Sidebar */}
-      <aside className="w-44 shrink-0 border-r border-white/8 bg-[#252526] py-2">
+      <aside aria-label="File explorer" className="w-44 shrink-0 border-r border-white/8 bg-[#252526] py-2">
         <div className="flex items-center gap-1.5 px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
           <Folder size={11} aria-hidden="true" />
           <span>portfolio</span>
@@ -70,7 +79,7 @@ export function Cursor(_: { windowId: string }) {
               <button
                 type="button"
                 onClick={() => setActiveFile(f.name)}
-                className={`flex w-full items-center gap-2 px-4 py-1 text-[11.5px] text-left transition-colors ${
+                className={`flex w-full items-center gap-2 px-4 py-1 text-left text-[11.5px] transition-colors ${
                   f.name === activeFile
                     ? "bg-[#37373d] text-white"
                     : "text-zinc-400 hover:bg-[#2a2d2e] hover:text-zinc-200"
@@ -88,7 +97,7 @@ export function Cursor(_: { windowId: string }) {
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Tab bar */}
         <div className="flex shrink-0 border-b border-white/8 bg-[#1e1e1e]">
-          <div className="flex items-center gap-2 border-r border-white/8 border-b-2 border-b-[#007acc] bg-[#1e1e1e] px-4 py-1.5 text-[11.5px] text-zinc-200">
+          <div className="flex items-center gap-2 border-b-2 border-b-[#007acc] border-r border-white/8 bg-[#1e1e1e] px-4 py-1.5 text-[11.5px] text-zinc-200">
             <FileCode2 size={11} className="text-blue-400" aria-hidden="true" />
             {activeFile}
           </div>
@@ -97,13 +106,13 @@ export function Cursor(_: { windowId: string }) {
         {/* Code */}
         <div className="flex-1 overflow-auto">
           {loading ? (
-            <div className="flex h-full items-center justify-center text-zinc-600 text-xs">
+            <div className="flex h-full items-center justify-center text-xs text-zinc-600">
               Loading…
             </div>
           ) : (
             <div
               className="[&>pre]:!bg-transparent [&>pre]:p-4 [&>pre]:text-[11.5px] [&>pre]:leading-[1.6]"
-              // Shiki produces safe, self-contained HTML.
+              // Shiki produces safe, self-contained HTML with no user-controlled input.
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{ __html: html }}
             />

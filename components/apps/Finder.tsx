@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ChevronLeft, ExternalLink, PlayCircle, FileText } from "lucide-react";
 import { PROJECTS, type Project, type ProjectFolder } from "@/lib/projects";
@@ -135,12 +136,16 @@ function Grid({
 function Thumb({ project, tNoPreview }: { project: Project; tNoPreview: string }) {
   if (project.hero) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={project.hero}
-        alt={project.title}
-        className="aspect-[4/3] w-full object-cover"
-      />
+      <div className="relative aspect-[4/3] w-full overflow-hidden">
+        <Image
+          src={project.hero}
+          alt={project.title}
+          fill
+          className="object-cover"
+          sizes="240px"
+          loading="lazy"
+        />
+      </div>
     );
   }
   // Placeholder: solid color block with the project title overlaid.
@@ -187,12 +192,15 @@ function DetailView({
 
       <div className="overflow-hidden rounded-lg border border-black/10 dark:border-white/10">
         {project.hero ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={project.hero}
-            alt={project.title}
-            className="aspect-video w-full object-cover"
-          />
+          <div className="relative aspect-video w-full overflow-hidden">
+            <Image
+              src={project.hero}
+              alt={project.title}
+              fill
+              className="object-cover"
+              sizes="680px"
+            />
+          </div>
         ) : (
           <div
             className="flex aspect-video w-full items-center justify-center"
@@ -256,13 +264,16 @@ function DetailView({
       {project.assets && project.assets.length > 0 && (
         <div className="grid grid-cols-3 gap-2 pt-1">
           {project.assets.map((src) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={src}
-              src={src}
-              alt=""
-              className="aspect-[4/3] w-full rounded-md border border-black/10 object-cover dark:border-white/10"
-            />
+            <div key={src} className="relative aspect-[4/3] w-full overflow-hidden rounded-md border border-black/10 dark:border-white/10">
+              <Image
+                src={src}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="220px"
+                loading="lazy"
+              />
+            </div>
           ))}
         </div>
       )}

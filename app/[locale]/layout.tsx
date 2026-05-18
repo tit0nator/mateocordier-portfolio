@@ -16,9 +16,23 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
+  const title = t("title");
+  const description = t("description");
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: locale === "fr" ? "fr_FR" : "en_US",
+      siteName: "Mateo Cordier",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

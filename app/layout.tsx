@@ -6,6 +6,7 @@ import { routing } from "@/i18n/routing";
 export const metadata: Metadata = {
   title: "Mateo Cordier",
   description: "Sites web et vidéos IA. Depuis Lyon.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://mateocordier.com"),
 };
 
 // Runs before React hydrates — sets .dark/.light on <html> and data-mobile

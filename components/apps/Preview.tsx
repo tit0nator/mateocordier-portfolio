@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import { PROJECTS } from "@/lib/projects";
 import { useWindowStore } from "@/lib/store";
 import { FileText } from "lucide-react";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export function Preview({ windowId }: Props) {
+  const locale = useLocale() as "fr" | "en";
   const windowData = useWindowStore((s) => s.windows.find((w) => w.id === windowId)?.data);
   const pdfId = (windowData?.pdfId as string) ?? null;
 
@@ -33,7 +35,7 @@ export function Preview({ windowId }: Props) {
           {project?.title}
         </span>
         <span className="ml-auto text-[10px] text-zinc-400 dark:text-zinc-500">
-          {project?.role.fr}
+          {project?.role[locale]}
         </span>
       </div>
 

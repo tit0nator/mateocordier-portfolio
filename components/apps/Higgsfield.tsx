@@ -62,7 +62,7 @@ export function Higgsfield({ windowId }: Props) {
   return (
     <div className="flex h-full bg-zinc-950 text-zinc-100">
       {/* Sidebar */}
-      <aside className="w-36 shrink-0 overflow-y-auto border-r border-white/10 bg-zinc-900/80 py-2">
+      <aside aria-label="Video queue" className="w-36 shrink-0 overflow-y-auto border-r border-white/10 bg-zinc-900/80 py-2">
         <p className="px-3 pb-1.5 text-[9.5px] font-semibold uppercase tracking-widest text-zinc-500">
           Lab Videos
         </p>
@@ -96,6 +96,8 @@ export function Higgsfield({ windowId }: Props) {
               src={activeProject.videoUrl}
               loop
               playsInline
+              preload="metadata"
+              aria-label={activeProject.title}
               className="h-full w-full object-contain"
               onTimeUpdate={() => setCurrentTime(videoRef.current?.currentTime ?? 0)}
               onLoadedMetadata={() => setDuration(videoRef.current?.duration ?? 0)}
@@ -124,6 +126,7 @@ export function Higgsfield({ windowId }: Props) {
             step={0.1}
             value={currentTime}
             onChange={handleScrub}
+            aria-label="Seek"
             className="h-1 w-full cursor-pointer appearance-none rounded-full bg-zinc-700 accent-white"
           />
 
@@ -131,10 +134,11 @@ export function Higgsfield({ windowId }: Props) {
           <div className="flex items-center gap-2">
             <button
               type="button"
+              aria-label={playing ? "Pause" : "Play"}
               onClick={togglePlay}
               className="flex items-center justify-center rounded-full bg-white/10 p-1.5 text-white hover:bg-white/20"
             >
-              {playing ? <Pause size={12} /> : <Play size={12} />}
+              {playing ? <Pause size={12} aria-hidden="true" /> : <Play size={12} aria-hidden="true" />}
             </button>
             <span className="text-[10px] tabular-nums text-zinc-500">
               {formatTime(currentTime)} / {formatTime(duration)}
