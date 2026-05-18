@@ -18,7 +18,7 @@ export function WindowCanvas() {
         const { Component, titleKey } = entry;
         return (
           <Window key={w.id} window={w} title={t(titleKey)}>
-            <Component />
+            <Component windowId={w.id} />
           </Window>
         );
       })}

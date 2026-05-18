@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 
 // The Notes window content. Bio is the locked Option D — pulled from messages.
-export function Notes() {
+export function Notes(_: { windowId: string }) {
   const t = useTranslations("apps.notes");
 
   return (

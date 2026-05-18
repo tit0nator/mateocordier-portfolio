@@ -12,7 +12,7 @@ const FOLDERS: { id: ProjectFolder; key: string }[] = [
   { id: "decks", key: "decks" },
 ];
 
-export function Finder() {
+export function Finder(_: { windowId: string }) {
   const t = useTranslations("apps.finder");
   const locale = useLocale() as "fr" | "en";
   const openApp = useWindowStore((s) => s.openApp);
@@ -31,11 +31,11 @@ export function Finder() {
       return;
     }
     if (project.folder === "lab") {
-      openApp("higgsfield");
+      openApp("higgsfield", { data: { videoId: project.id } });
       return;
     }
     if (project.folder === "decks") {
-      openApp("preview");
+      openApp("preview", { data: { pdfId: project.id } });
       return;
     }
   }

@@ -16,6 +16,8 @@ export interface WindowState {
   position: { x: number; y: number };
   size: { width: number; height: number };
   zIndex: number;
+  // Optional payload an app can read on mount (e.g. which video or PDF to pre-load).
+  data?: Record<string, unknown>;
 }
 
 interface WindowStore {
@@ -23,7 +25,7 @@ interface WindowStore {
   nextZ: number;
   focusedId: string | null;
   openCount: number; // used to stagger new window positions
-  openApp: (app: AppId, opts?: { position?: { x: number; y: number }; size?: { width: number; height: number } }) => void;
+  openApp: (app: AppId, opts?: { position?: { x: number; y: number }; size?: { width: number; height: number }; data?: Record<string, unknown> }) => void;
   closeWindow: (id: string) => void;
   focusWindow: (id: string) => void;
   moveWindow: (id: string, position: { x: number; y: number }) => void;
@@ -75,8 +77,9 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
       const id = `${app}-${Date.now()}`;
       const position = opts?.position ?? staggeredPosition(state.openCount);
       const size = opts?.size ?? DEFAULT_SIZES[app];
+      const data = opts?.data;
       return {
-        windows: [...state.windows, { id, app, position, size, zIndex: z }],
+        windows: [...state.windows, { id, app, position, size, zIndex: z, data }],
         nextZ: z + 1,
         focusedId: id,
         openCount: state.openCount + 1,

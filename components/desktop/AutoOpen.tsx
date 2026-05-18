@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import { useWindowStore } from "@/lib/store";
 
-// On first paint, populate the desktop with the windows specified in the spec.
-// Day 2: Notes only. Days 4+: add Safari (Body & Spirit) and Higgsfield rendering bar.
+// On first paint, populate the desktop with three windows as specified:
+// Notes front-left, Safari mid-right, Higgsfield bottom-right.
 export function AutoOpen() {
   const openApp = useWindowStore((s) => s.openApp);
   const windowsLength = useWindowStore((s) => s.windows.length);
@@ -12,6 +12,11 @@ export function AutoOpen() {
   useEffect(() => {
     if (windowsLength === 0) {
       openApp("notes", { position: { x: 60, y: 60 } });
+      openApp("safari", { position: { x: 320, y: 50 } });
+      openApp("higgsfield", {
+        position: { x: 260, y: 310 },
+        data: { videoId: "ap-swatch" },
+      });
     }
     // Intentional: run once on mount only.
     // eslint-disable-next-line react-hooks/exhaustive-deps

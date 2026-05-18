@@ -45,6 +45,7 @@ export const PROJECTS: Project[] = [
       en: "Landing site + Stripe checkout for a fitness studio. Delivered in 4 days.",
     },
     externalUrl: "https://bodyspirit-8ukwc26w.manus.space",
+    hero: "/projects/body-spirit/hero.jpg",
     placeholderColor: "#c75c4a",
   },
   {
