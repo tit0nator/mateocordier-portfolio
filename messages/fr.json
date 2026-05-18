@@ -5,7 +5,12 @@
   },
   "menubar": {
     "ownerName": "Mateo",
-    "nowPlaying": "Frank Ocean — Pyramids"
+    "nowPlaying": "Frank Ocean — Pyramids",
+    "locale": "FR",
+    "about": "À propos",
+    "sleep": "Mettre en veille…",
+    "restart": "Redémarrer…",
+    "shutdown": "Éteindre…"
   },
   "dock": {
     "finder": "Finder",
@@ -34,6 +39,19 @@
       "play": "Lancer la vidéo",
       "openDeck": "Ouvrir le deck",
       "noPreview": "Aperçu bientôt"
+    },
+    "cursor": {
+      "title": "Cursor",
+      "fileTree": "Fichiers"
+    },
+    "mail": {
+      "title": "Mail",
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "send": "Envoyer",
+      "sent": "Message prêt — ton client mail devrait s'ouvrir.",
+      "back": "Nouveau message"
     }
   }
 }
