@@ -15,7 +15,7 @@ export function AutoOpen() {
     if (windowsLength === 0) {
       openApp("notes", { position: { x: 60, y: 60 } });
       openApp("safari", { position: { x: 320, y: 50 } });
-      openApp("higgsfield", {
+      openApp("titoflix", {
         position: { x: 260, y: 310 },
         data: { videoId: "ap-swatch" },
       });

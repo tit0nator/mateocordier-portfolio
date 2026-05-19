@@ -16,11 +16,9 @@ export function Window({ window: w, title, children }: WindowProps) {
   const focusWindow = useWindowStore((s) => s.focusWindow);
   const focusedId = useWindowStore((s) => s.focusedId);
 
-  // The motion values are the source of truth during drag.
   const x = useMotionValue(w.position.x);
   const y = useMotionValue(w.position.y);
 
-  // If the store moves us externally (e.g., reopen at staggered position), sync the motion values.
   useEffect(() => {
     x.set(w.position.x);
     y.set(w.position.y);
@@ -37,10 +35,14 @@ export function Window({ window: w, title, children }: WindowProps) {
       dragListener={false}
       dragControls={dragControls}
       onDragEnd={() => moveWindow(w.id, { x: x.get(), y: y.get() })}
-      initial={{ opacity: 0, scale: 0.96 }}
+      initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      transition={
+        isFocused
+          ? { type: "spring", stiffness: 300, damping: 25 }
+          : { duration: 0.18 }
+      }
       style={{
         x,
         y,
@@ -48,29 +50,55 @@ export function Window({ window: w, title, children }: WindowProps) {
         width: w.size.width,
         height: w.size.height,
         position: "absolute",
+        borderRadius: "var(--radius-window)",
+        boxShadow: isFocused
+          ? "var(--shadow-window-focused)"
+          : "var(--shadow-window-unfocused)",
+        transition: "box-shadow 200ms ease",
+        overflow: "hidden",
       }}
       onPointerDown={() => focusWindow(w.id)}
-      className={`overflow-hidden rounded-xl border backdrop-blur-xl shadow-2xl ${
+      className={`border ${
         isFocused
-          ? "border-black/15 dark:border-white/15"
-          : "border-black/8 dark:border-white/10 opacity-95"
+          ? "border-black/12 dark:border-white/12"
+          : "border-black/8 dark:border-white/8 opacity-95"
       }`}
     >
+      {/* Title bar */}
       <div
-        // Drag handle. pointer-down on the header starts the drag via dragControls.
         onPointerDown={(e) => dragControls.start(e)}
-        className={`flex h-8 cursor-grab items-center gap-2 border-b px-3 select-none active:cursor-grabbing ${
+        className={`relative flex cursor-grab items-center gap-2 border-b px-3 select-none active:cursor-grabbing ${
           isFocused
-            ? "border-black/8 bg-white/85 dark:border-white/8 dark:bg-zinc-800/85"
-            : "border-black/5 bg-white/70 dark:border-white/5 dark:bg-zinc-800/70"
+            ? "border-black/8 dark:border-white/8"
+            : "border-black/5 dark:border-white/5"
         }`}
+        style={{
+          height: "var(--titlebar-height)",
+          background: "var(--glass-bg)",
+          backdropFilter: "blur(var(--glass-blur-light))",
+          WebkitBackdropFilter: "blur(var(--glass-blur-light))",
+          opacity: isFocused ? 1 : 0.7,
+        }}
       >
+        {/* Glass highlight on focused title bar top edge */}
+        {isFocused && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0"
+            style={{ height: 1, background: "var(--glass-highlight)" }}
+          />
+        )}
         <WindowChrome onClose={() => closeWindow(w.id)} isFocused={isFocused} />
         <span className="ml-1 truncate text-[12px] font-medium text-zinc-700 dark:text-zinc-200">
           {title}
         </span>
       </div>
-      <div className="h-[calc(100%-2rem)] overflow-auto bg-white/95 dark:bg-zinc-900/95">
+
+      {/* Content area */}
+      <div
+        className="overflow-auto bg-white/95 dark:bg-zinc-900/95"
+        style={{ height: "calc(100% - var(--titlebar-height))" }}
+      >
         {children}
       </div>
     </motion.div>
@@ -84,14 +112,17 @@ function WindowChrome({
   onClose: () => void;
   isFocused: boolean;
 }) {
-  // Chrome buttons stop pointer propagation so clicking them doesn't start a drag.
   const stop = (e: React.PointerEvent) => e.stopPropagation();
-  const colorClose = isFocused ? "bg-[#ff5f57]" : "bg-zinc-400/60";
-  const colorMin = isFocused ? "bg-[#febc2e]" : "bg-zinc-400/60";
-  const colorMax = isFocused ? "bg-[#28c840]" : "bg-zinc-400/60";
+  const colorClose = isFocused ? "#ff5f57" : "#d4d4d8";
+  const colorMin = isFocused ? "#febc2e" : "#d4d4d8";
+  const colorMax = isFocused ? "#28c840" : "#d4d4d8";
+
+  // In dark mode, unfocused buttons are darker
+  const unfocusedDark = "#52525b";
 
   return (
-    <div className="group/chrome flex items-center gap-1.5">
+    <div className="group/chrome flex items-center gap-2">
+      {/* Close */}
       <button
         type="button"
         aria-label="Close"
@@ -100,7 +131,11 @@ function WindowChrome({
           e.stopPropagation();
           onClose();
         }}
-        className={`flex h-3 w-3 items-center justify-center rounded-full transition-colors ${colorClose}`}
+        className="group/btn flex h-3.5 w-3.5 items-center justify-center rounded-full transition-colors"
+        style={{
+          background: colorClose,
+          boxShadow: "inset 0 1px 2px rgba(0,0,0,0.15)",
+        }}
       >
         <svg
           aria-hidden="true"
@@ -113,8 +148,26 @@ function WindowChrome({
           <path d="M1 1l4 4M5 1L1 5" />
         </svg>
       </button>
-      <span aria-hidden="true" className={`h-3 w-3 rounded-full ${colorMin}`} />
-      <span aria-hidden="true" className={`h-3 w-3 rounded-full ${colorMax}`} />
+
+      {/* Minimize */}
+      <span
+        aria-hidden="true"
+        className="h-3.5 w-3.5 rounded-full"
+        style={{
+          background: colorMin,
+          boxShadow: "inset 0 1px 2px rgba(0,0,0,0.15)",
+        }}
+      />
+
+      {/* Maximize */}
+      <span
+        aria-hidden="true"
+        className="h-3.5 w-3.5 rounded-full"
+        style={{
+          background: colorMax,
+          boxShadow: "inset 0 1px 2px rgba(0,0,0,0.15)",
+        }}
+      />
     </div>
   );
 }

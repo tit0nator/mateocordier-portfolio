@@ -1,19 +1,35 @@
 "use client";
 
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { useThemeStore } from "@/lib/themeStore";
 
 export function Wallpaper() {
   const isDark = useThemeStore((s) => s.isDark);
-
-  const gradient = isDark
-    ? "radial-gradient(120% 80% at 20% 10%, #1a1228 0%, #0e0c1a 50%, #060510 100%)"
-    : "radial-gradient(120% 80% at 20% 10%, #d7c8e0 0%, #b7a6c7 45%, #6f6383 100%)";
+  const src = isDark ? "/wallpaper/dark.jpg" : "/wallpaper/light.jpg";
 
   return (
-    <div
-      aria-hidden="true"
-      className="absolute inset-0 z-0 transition-all duration-700"
-      style={{ background: gradient }}
-    />
+    <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden">
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={src}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={src}
+            alt=""
+            fill
+            priority
+            quality={90}
+            sizes="100vw"
+            className="object-cover"
+          />
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 }

@@ -15,11 +15,15 @@
   "dock": {
     "finder": "Finder",
     "safari": "Safari",
-    "higgsfield": "Higgsfield",
+    "titoflix": "TitoFlix",
     "preview": "Preview",
     "cursor": "Cursor",
     "mail": "Mail",
     "notes": "Notes",
+    "messages": "Messages",
+    "stocks": "Bourse",
+    "strava": "Strava",
+    "links": "Liens",
     "resume": "Resume"
   },
   "apps": {

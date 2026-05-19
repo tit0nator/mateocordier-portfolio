@@ -12,7 +12,7 @@ type TabApp = { id: AppId; Icon: LucideIcon; labelKey: string };
 const TAB_APPS: TabApp[] = [
   { id: "finder",     Icon: Folder,      labelKey: "finder" },
   { id: "safari",     Icon: Compass,     labelKey: "safari" },
-  { id: "higgsfield", Icon: PlayCircle,  labelKey: "higgsfield" },
+  { id: "titoflix",   Icon: PlayCircle,  labelKey: "titoflix" },
   { id: "preview",    Icon: FileText,    labelKey: "preview" },
   { id: "cursor",     Icon: Code2,       labelKey: "cursor" },
   { id: "mail",       Icon: Mail,        labelKey: "mail" },

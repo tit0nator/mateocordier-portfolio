@@ -1,5 +1,5 @@
 // The full content map for the Finder. Each entry is a card in one of
-// three folders. Days 4+ wire the Lab videos into Higgsfield and the
+// three folders. Days 4+ wire the Lab videos into TitoFlix and the
 // Decks PDFs into Preview; today's job is just to render the cards and
 // the Selected Work detail view.
 
@@ -22,7 +22,7 @@ export interface Project {
   assets?: string[];
   /** External URL for the live site (Selected Work only). */
   externalUrl?: string;
-  /** /public path to the video file (Lab folder). Wired to Higgsfield on Day 4. */
+  /** /public path to the video file (Lab folder). Wired to TitoFlix on Day 4. */
   videoUrl?: string;
   /** /public path to the PDF (Decks folder). Wired to Preview on Day 4. */
   pdfUrl?: string;
@@ -104,12 +104,12 @@ export const PROJECTS: Project[] = [
     slug: "ap-swatch",
     folder: "lab",
     title: "AP × Swatch",
-    role: { fr: "Higgsfield · Hypermotion · 2026", en: "Higgsfield · Hypermotion · 2026" },
+    role: { fr: "TitoFlix · Hypermotion · 2026", en: "TitoFlix · Hypermotion · 2026" },
     year: 2026,
-    tags: ["IA motion", "Higgsfield", "watch culture"],
+    tags: ["IA motion", "TitoFlix", "watch culture"],
     description: {
-      fr: "Pièce motion IA — collab imaginaire AP × Swatch en hypermotion. Générée sur Higgsfield.",
-      en: "AI motion piece — imagined AP × Swatch hypermotion collab. Generated on Higgsfield.",
+      fr: "Pièce motion IA — collab imaginaire AP × Swatch en hypermotion. Générée sur TitoFlix.",
+      en: "AI motion piece — imagined AP × Swatch hypermotion collab. Generated on TitoFlix.",
     },
     videoUrl: "/lab/ap-swatch.mp4",
     placeholderColor: "#2a2a2f",
@@ -119,12 +119,12 @@ export const PROJECTS: Project[] = [
     slug: "prime",
     folder: "lab",
     title: "Prime",
-    role: { fr: "Higgsfield · Hypermotion · 2026", en: "Higgsfield · Hypermotion · 2026" },
+    role: { fr: "TitoFlix · Hypermotion · 2026", en: "TitoFlix · Hypermotion · 2026" },
     year: 2026,
-    tags: ["IA motion", "Higgsfield", "beverage"],
+    tags: ["IA motion", "TitoFlix", "beverage"],
     description: {
-      fr: "Pièce motion IA pour Prime Energy — hypermotion généré sur Higgsfield.",
-      en: "AI motion piece for Prime Energy — hypermotion generated on Higgsfield.",
+      fr: "Pièce motion IA pour Prime Energy — hypermotion généré sur TitoFlix.",
+      en: "AI motion piece for Prime Energy — hypermotion generated on TitoFlix.",
     },
     videoUrl: "/lab/prime.mp4",
     placeholderColor: "#1f4d8c",
@@ -134,12 +134,12 @@ export const PROJECTS: Project[] = [
     slug: "fanta",
     folder: "lab",
     title: "Fanta",
-    role: { fr: "Higgsfield · Hypermotion · 2026", en: "Higgsfield · Hypermotion · 2026" },
+    role: { fr: "TitoFlix · Hypermotion · 2026", en: "TitoFlix · Hypermotion · 2026" },
     year: 2026,
-    tags: ["IA motion", "Higgsfield", "beverage"],
+    tags: ["IA motion", "TitoFlix", "beverage"],
     description: {
-      fr: "Pièce motion IA pour Fanta — couleurs saturées, énergie maximale, rendu Higgsfield.",
-      en: "AI motion piece for Fanta — saturated colours, maximum energy, rendered on Higgsfield.",
+      fr: "Pièce motion IA pour Fanta — couleurs saturées, énergie maximale, rendu TitoFlix.",
+      en: "AI motion piece for Fanta — saturated colours, maximum energy, rendered on TitoFlix.",
     },
     videoUrl: "/lab/fanta.mp4",
     placeholderColor: "#d96d2a",
@@ -149,12 +149,12 @@ export const PROJECTS: Project[] = [
     slug: "kiprun",
     folder: "lab",
     title: "Kiprun",
-    role: { fr: "Higgsfield · Hypermotion · 2026", en: "Higgsfield · Hypermotion · 2026" },
+    role: { fr: "TitoFlix · Hypermotion · 2026", en: "TitoFlix · Hypermotion · 2026" },
     year: 2026,
-    tags: ["IA motion", "Higgsfield", "running"],
+    tags: ["IA motion", "TitoFlix", "running"],
     description: {
-      fr: "Pièce motion IA pour Kiprun (running Decathlon) — dynamisme et terrain, rendu Higgsfield.",
-      en: "AI motion piece for Kiprun (Decathlon running) — terrain energy and pace, rendered on Higgsfield.",
+      fr: "Pièce motion IA pour Kiprun (running Decathlon) — dynamisme et terrain, rendu TitoFlix.",
+      en: "AI motion piece for Kiprun (Decathlon running) — terrain energy and pace, rendered on TitoFlix.",
     },
     videoUrl: "/lab/kiprun.mp4",
     placeholderColor: "#3b6e3d",

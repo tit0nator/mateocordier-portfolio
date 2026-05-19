@@ -3,11 +3,15 @@ import { create } from "zustand";
 export type AppId =
   | "finder"
   | "safari"
-  | "higgsfield"
+  | "titoflix"
   | "preview"
   | "cursor"
   | "mail"
   | "notes"
+  | "messages"
+  | "stocks"
+  | "strava"
+  | "links"
   | "resume";
 
 export interface WindowState {
@@ -35,11 +39,15 @@ interface WindowStore {
 const DEFAULT_SIZES: Record<AppId, { width: number; height: number }> = {
   finder: { width: 720, height: 460 },
   safari: { width: 720, height: 480 },
-  higgsfield: { width: 520, height: 360 },
+  titoflix: { width: 520, height: 360 },
   preview: { width: 560, height: 740 },
   cursor: { width: 700, height: 460 },
   mail: { width: 460, height: 420 },
   notes: { width: 360, height: 260 },
+  messages: { width: 380, height: 520 },
+  stocks: { width: 520, height: 400 },
+  strava: { width: 440, height: 500 },
+  links: { width: 340, height: 400 },
   resume: { width: 0, height: 0 }, // resume is a download, not a window
 };
 
@@ -62,7 +70,6 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
 
   openApp: (app, opts) => {
     if (app === "resume") {
-      // Resume is a download trigger, not a window — handled by the dock click directly.
       return;
     }
 

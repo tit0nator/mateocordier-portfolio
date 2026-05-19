@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ChevronLeft, ExternalLink, PlayCircle, FileText } from "lucide-react";
 import { PROJECTS, type Project, type ProjectFolder } from "@/lib/projects";
 import { useWindowStore } from "@/lib/store";
+import { VibrancySidebar } from "@/components/shared/VibrancySidebar";
 
 const FOLDERS: { id: ProjectFolder; key: string }[] = [
   { id: "selected", key: "selected" },
@@ -32,7 +33,7 @@ export function Finder(_: { windowId: string }) {
       return;
     }
     if (project.folder === "lab") {
-      openApp("higgsfield", { data: { videoId: project.id } });
+      openApp("titoflix", { data: { videoId: project.id } });
       return;
     }
     if (project.folder === "decks") {
@@ -44,7 +45,7 @@ export function Finder(_: { windowId: string }) {
   return (
     <div className="flex h-full text-zinc-800 dark:text-zinc-100">
       {/* Sidebar */}
-      <aside className="w-36 shrink-0 border-r border-black/10 bg-zinc-50/80 px-2 py-3 dark:border-white/10 dark:bg-zinc-800/60">
+      <VibrancySidebar className="px-2 py-3">
         <p className="px-2 pb-1 text-[10px] font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
           Folders
         </p>
@@ -71,7 +72,7 @@ export function Finder(_: { windowId: string }) {
             );
           })}
         </ul>
-      </aside>
+      </VibrancySidebar>
 
       {/* Right pane */}
       <main className="flex-1 overflow-auto">

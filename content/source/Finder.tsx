@@ -31,7 +31,7 @@ export function Finder(_: { windowId: string }) {
       return;
     }
     if (project.folder === "lab") {
-      openApp("higgsfield", { data: { videoId: project.id } });
+      openApp("titoflix", { data: { videoId: project.id } });
       return;
     }
     if (project.folder === "decks") {

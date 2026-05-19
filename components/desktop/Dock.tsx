@@ -1,44 +1,62 @@
 "use client";
 
-import {
-  Folder,
-  Compass,
-  PlayCircle,
-  FileText,
-  Code2,
-  Mail,
-  StickyNote,
-  Download,
-  type LucideIcon,
-} from "lucide-react";
+import { useRef, useCallback } from "react";
 import { useTranslations, useLocale } from "next-intl";
+import { motionValue, animate, type MotionValue } from "framer-motion";
 import { useWindowStore, type AppId } from "@/lib/store";
+import { DockIcon } from "./DockIcon";
 
-type DockApp = {
-  id: AppId;
-  labelKey: string;
-  Icon: LucideIcon;
-};
-
-const DOCK_APPS: DockApp[] = [
-  { id: "finder", labelKey: "finder", Icon: Folder },
-  { id: "safari", labelKey: "safari", Icon: Compass },
-  { id: "higgsfield", labelKey: "higgsfield", Icon: PlayCircle },
-  { id: "preview", labelKey: "preview", Icon: FileText },
-  { id: "cursor", labelKey: "cursor", Icon: Code2 },
-  { id: "mail", labelKey: "mail", Icon: Mail },
-  { id: "notes", labelKey: "notes", Icon: StickyNote },
-  { id: "resume", labelKey: "resume", Icon: Download },
+const DOCK_APPS: AppId[] = [
+  "finder", "safari", "titoflix", "preview", "cursor",
+  "mail", "notes", "messages", "stocks", "strava", "links",
 ];
+const ALL_APPS: AppId[] = [...DOCK_APPS, "resume"];
+
+const INFLUENCE_RADIUS = 150;
+const BASE_SCALE = 1;
+const PEAK_SCALE = 1.5;
+
+function initScales(): Record<AppId, MotionValue<number>> {
+  return Object.fromEntries(
+    ALL_APPS.map((id) => [id, motionValue(BASE_SCALE)])
+  ) as Record<AppId, MotionValue<number>>;
+}
 
 export function Dock() {
   const t = useTranslations("dock");
   const locale = useLocale();
   const openApp = useWindowStore((s) => s.openApp);
+  const windows = useWindowStore((s) => s.windows);
+
+  // Motion values live in a ref so they're stable across renders (no hooks in loops).
+  const scales = useRef<Record<AppId, MotionValue<number>>>(initScales());
+
+  // Refs to icon containers for measuring center X on mousemove.
+  const iconRefs = useRef<Partial<Record<AppId, HTMLDivElement>>>({});
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    const mouseX = e.clientX;
+    ALL_APPS.forEach((id) => {
+      const el = iconRefs.current[id];
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const distance = Math.abs(centerX - mouseX);
+      const scale =
+        BASE_SCALE +
+        (PEAK_SCALE - BASE_SCALE) * Math.max(0, 1 - (distance / INFLUENCE_RADIUS) ** 2);
+      scales.current[id].set(scale);
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    ALL_APPS.forEach((id) => {
+      animate(scales.current[id], BASE_SCALE, { duration: 0.15, ease: "easeOut" });
+    });
+  }, []);
 
   function handleClick(id: AppId) {
     if (id === "resume") {
-      // Resume is a download trigger — serve the FR or EN PDF based on active locale.
       const filename = `Resume-Mateo-Cordier-${locale.toUpperCase()}.pdf`;
       const link = document.createElement("a");
       link.href = `/${filename}`;
@@ -56,29 +74,46 @@ export function Dock() {
       aria-label="Dock"
       className="pointer-events-auto absolute bottom-3 left-1/2 z-30 -translate-x-1/2"
     >
-      <ul
-        className="flex items-end gap-1.5 rounded-2xl border px-2 py-1.5 backdrop-blur-xl"
+      <div
+        className="flex items-end px-1.5 py-1"
         style={{
-          background: "var(--dock-bg)",
-          borderColor: "var(--dock-border)",
+          background: "var(--glass-bg)",
+          backdropFilter: "blur(var(--glass-blur-heavy))",
+          WebkitBackdropFilter: "blur(var(--glass-blur-heavy))",
+          border: "0.5px solid var(--glass-border)",
+          borderRadius: "var(--radius-dock)",
+          boxShadow: "var(--shadow-dock)",
+          gap: 2,
         }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
       >
-        {DOCK_APPS.map(({ id, labelKey, Icon }) => (
-          <li key={id} className="group relative">
-            <button
-              type="button"
-              aria-label={t(labelKey)}
-              onClick={() => handleClick(id)}
-              className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/70 transition-transform duration-150 hover:-translate-y-1 hover:scale-105 active:scale-95 dark:bg-zinc-800/70"
-            >
-              <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
-            </button>
-            <span className="pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-black/80 px-2 py-1 text-[11px] text-white opacity-0 transition-opacity delay-0 duration-150 group-hover:opacity-100 group-hover:delay-[200ms] dark:bg-white/90 dark:text-black">
-              {t(labelKey)}
-            </span>
-          </li>
-        ))}
-      </ul>
+        {ALL_APPS.map((id) => {
+          const isSeparatorSlot = id === "resume";
+          const isOpen = windows.some((w) => w.app === id);
+
+          return (
+            <div key={id} className="flex items-end">
+              {isSeparatorSlot && (
+                <div
+                  aria-hidden="true"
+                  className="mx-1 self-center opacity-15"
+                  style={{ width: 1, height: 24, background: "currentColor" }}
+                />
+              )}
+              <div ref={(el) => { if (el) iconRefs.current[id] = el; }}>
+                <DockIcon
+                  id={id}
+                  label={t(id as Parameters<typeof t>[0])}
+                  scaleValue={scales.current[id]}
+                  isOpen={isOpen}
+                  onClick={() => handleClick(id)}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </nav>
   );
 }

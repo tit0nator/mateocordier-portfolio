@@ -12,6 +12,27 @@
   --menubar-fg: #1d1d1f;
   --dock-bg: rgba(255, 255, 255, 0.55);
   --dock-border: rgba(0, 0, 0, 0.08);
+
+  /* ── Glass materials (Liquid Glass tokens) ── */
+  --glass-blur-light: 40px;
+  --glass-blur-heavy: 80px;
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-highlight: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%);
+
+  /* ── Shadows ── */
+  --shadow-window-focused: 0 2px 8px rgba(0, 0, 0, 0.12), 0 12px 40px rgba(0, 0, 0, 0.15);
+  --shadow-window-unfocused: 0 1px 4px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-dock: 0 2px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+  /* ── Radii and sizing ── */
+  --radius-window: 10px;
+  --radius-dock: 22px;
+  --radius-dock-icon: 12px;
+  --titlebar-height: 36px;
+  --menubar-height: 24px;
+  --dock-icon-base: 48px;
+  --dock-icon-peak: 72px;
 }
 
 /* ── Dark via .dark class (explicit toggle) ──────── */
@@ -22,6 +43,10 @@
   --menubar-fg: #f5f5f7;
   --dock-bg: rgba(28, 28, 30, 0.55);
   --dock-border: rgba(255, 255, 255, 0.1);
+
+  /* ── Glass materials (dark) ── */
+  --glass-bg: rgba(30, 30, 30, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 /* ── Dark via system preference (no class set yet) ── */
@@ -33,6 +58,8 @@
     --menubar-fg: #f5f5f7;
     --dock-bg: rgba(28, 28, 30, 0.55);
     --dock-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(30, 30, 30, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.08);
   }
 }
 
