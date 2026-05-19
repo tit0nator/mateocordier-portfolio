@@ -8,7 +8,8 @@ import { DockIcon } from "./DockIcon";
 
 const DOCK_APPS: AppId[] = [
   "finder", "safari", "mflix", "preview", "cursor",
-  "mail", "notes", "messages", "stocks", "strava", "links",
+  "mail", "notes", "messages", "stocks", "strava",
+  "deezer", "photos", "chess", "links",
 ];
 const ALL_APPS: AppId[] = [...DOCK_APPS, "resume"];
 

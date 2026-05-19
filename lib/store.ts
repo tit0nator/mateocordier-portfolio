@@ -11,6 +11,9 @@ export type AppId =
   | "messages"
   | "stocks"
   | "strava"
+  | "deezer"
+  | "photos"
+  | "chess"
   | "links"
   | "resume";
 
@@ -47,7 +50,10 @@ const DEFAULT_SIZES: Record<AppId, { width: number; height: number }> = {
   messages: { width: 380, height: 520 },
   stocks: { width: 520, height: 400 },
   strava: { width: 440, height: 500 },
-  links: { width: 340, height: 400 },
+  deezer: { width: 380, height: 480 },
+  photos: { width: 580, height: 460 },
+  chess:  { width: 440, height: 420 },
+  links:  { width: 340, height: 400 },
   resume: { width: 0, height: 0 }, // resume is a download, not a window
 };
 

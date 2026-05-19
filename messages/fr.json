@@ -23,6 +23,9 @@
     "messages": "Messages",
     "stocks": "Bourse",
     "strava": "Strava",
+    "deezer": "Deezer",
+    "photos": "Photos",
+    "chess": "Échecs",
     "links": "Liens",
     "resume": "Resume"
   },
@@ -115,6 +118,35 @@
     },
     "links": {
       "tagline": "Dev & Marketing freelance · Lyon"
+    },
+    "deezer": {
+      "title": "Deezer",
+      "fallback": "Ouvrir sur Deezer"
+    },
+    "photos": {
+      "albums": {
+        "all": "Toutes les photos",
+        "travel": "Voyages",
+        "street": "Street",
+        "lyon": "Lyon",
+        "food": "Food"
+      },
+      "close": "Fermer"
+    },
+    "chess": {
+      "title": "Chess.com",
+      "loading": "Chargement…",
+      "error": "Impossible de charger les stats",
+      "cta": "Voir sur Chess.com",
+      "stats": {
+        "rapid": "Rapide",
+        "blitz": "Blitz",
+        "bullet": "Bullet",
+        "puzzle": "Puzzles",
+        "wins": "V",
+        "losses": "D",
+        "draws": "N"
+      }
     }
   }
 }

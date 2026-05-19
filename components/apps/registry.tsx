@@ -11,6 +11,9 @@ import { Mail } from "./Mail";
 import { Messages } from "./Messages";
 import { Stocks } from "./Stocks";
 import { Strava } from "./Strava";
+import { Deezer } from "./Deezer";
+import { Photos } from "./Photos";
+import { Chess } from "./Chess";
 import { Links } from "./Links";
 
 export type AppProps = { windowId: string };
@@ -31,6 +34,9 @@ export const APP_REGISTRY: Partial<Record<AppId, AppEntry>> = {
   messages: { Component: Messages, titleKey: "messages" },
   stocks:   { Component: Stocks,   titleKey: "stocks"   },
   strava:   { Component: Strava,   titleKey: "strava"   },
+  deezer:   { Component: Deezer,   titleKey: "deezer"   },
+  photos:   { Component: Photos,   titleKey: "photos"   },
+  chess:    { Component: Chess,    titleKey: "chess"    },
   links:    { Component: Links,    titleKey: "links"    },
   // "resume" is intentionally absent — clicking the resume dock icon triggers
   // a PDF download, it never opens a window.

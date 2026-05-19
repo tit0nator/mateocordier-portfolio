@@ -2,6 +2,7 @@ import { Wallpaper } from "./Wallpaper";
 import { Menubar } from "./Menubar";
 import { Dock } from "./Dock";
 import { AutoOpen } from "./AutoOpen";
+import { KonamiEasterEgg } from "./KonamiEasterEgg";
 import { WindowCanvas } from "@/components/window/WindowCanvas";
 
 // Top-level desktop shell. The wallpaper fills the viewport; the menubar
@@ -18,6 +19,7 @@ export function Desktop() {
       >
         <WindowCanvas />
       </div>
+      <KonamiEasterEgg />
       <Dock />
       <AutoOpen />
     </div>

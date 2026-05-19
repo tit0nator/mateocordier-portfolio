@@ -1,25 +1,87 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { ExternalLink, Lock } from "lucide-react";
 
-const SITES: Record<string, { label: string; url: string; hero: string }> = {
-  bodyspirit: {
-    label: "bodyspirit-8ukwc26w.manus.space",
-    url: "https://bodyspirit-8ukwc26w.manus.space",
-    hero: "/projects/body-spirit/hero.jpg",
+interface Tab {
+  id: string;
+  domain: string;
+  url: string;
+  screenshotPath: string;
+}
+
+const TABS: Tab[] = [
+  {
+    id: "surge",
+    domain: "lesurge.com",
+    url: "https://www.lesurge.com",
+    screenshotPath: "/projects/surge/hero.jpg",
   },
+  {
+    id: "reserve",
+    domain: "réserve.shop",
+    url: "https://reserveepic-treosgst.manus.space",
+    screenshotPath: "/projects/reserve/hero.jpg",
+  },
+  {
+    id: "bodyspirit",
+    domain: "bodyspirit-8ukwc26w.manus.space",
+    url: "https://bodyspirit-8ukwc26w.manus.space",
+    screenshotPath: "/projects/body-spirit/hero.jpg",
+  },
+];
+
+// Tiny favicon letters for each tab
+const TAB_FAVICONS: Record<string, { letter: string; bg: string }> = {
+  surge:      { letter: "S", bg: "#111" },
+  reserve:    { letter: "R", bg: "#7a5a3c" },
+  bodyspirit: { letter: "B", bg: "#c75c4a" },
 };
 
 export function Safari(_: { windowId: string }) {
-  const site = SITES["bodyspirit"];
+  const [activeId, setActiveId] = useState(TABS[0].id);
+  const [imgError, setImgError] = useState<Record<string, boolean>>({});
+
+  const active = TABS.find((t) => t.id === activeId)!;
+  const favicon = TAB_FAVICONS[activeId];
 
   return (
     <div className="flex h-full flex-col bg-white dark:bg-zinc-900">
-      {/* Fake Safari toolbar */}
-      <div className="flex shrink-0 items-center gap-2 border-b border-black/10 bg-zinc-100/80 px-3 py-1.5 dark:border-white/10 dark:bg-zinc-800/80">
-        {/* Nav buttons (decorative) */}
-        <div className="flex gap-1">
+      {/* Tab bar */}
+      <div className="flex shrink-0 items-end gap-0.5 border-b border-black/10 bg-zinc-100/90 px-2 pt-1.5 dark:border-white/10 dark:bg-zinc-800/90">
+        {TABS.map((tab) => {
+          const fav = TAB_FAVICONS[tab.id];
+          const isActive = tab.id === activeId;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveId(tab.id)}
+              className={`flex items-center gap-1.5 rounded-t-md px-3 py-1.5 text-[11px] transition-colors ${
+                isActive
+                  ? "bg-white text-zinc-800 shadow-sm dark:bg-zinc-700 dark:text-zinc-100"
+                  : "text-zinc-500 hover:bg-zinc-200/60 dark:text-zinc-400 dark:hover:bg-zinc-700/40"
+              }`}
+              style={{ minWidth: 100, maxWidth: 160 }}
+            >
+              <span
+                className="flex h-4 w-4 shrink-0 items-center justify-center rounded-sm text-[9px] font-bold text-white"
+                style={{ background: fav.bg }}
+                aria-hidden="true"
+              >
+                {fav.letter}
+              </span>
+              <span className="truncate">{tab.domain}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Toolbar */}
+      <div className="flex shrink-0 items-center gap-2 border-b border-black/10 bg-zinc-50/90 px-3 py-1.5 dark:border-white/10 dark:bg-zinc-800/60">
+        {/* Nav arrows (decorative) */}
+        <div className="flex gap-0.5">
           {["←", "→"].map((ch) => (
             <span
               key={ch}
@@ -32,34 +94,56 @@ export function Safari(_: { windowId: string }) {
         </div>
 
         {/* URL bar */}
-        <div className="flex flex-1 items-center gap-1.5 rounded-md bg-white px-2.5 py-0.5 text-[11px] text-zinc-500 shadow-inner dark:bg-zinc-700 dark:text-zinc-400">
-          <Lock size={10} className="text-green-500 shrink-0" aria-hidden="true" />
-          <span className="truncate">{site.label}</span>
+        <div className="flex flex-1 items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-[11px] text-zinc-500 shadow-inner dark:bg-zinc-700 dark:text-zinc-400">
+          <Lock size={10} className="shrink-0 text-green-500" aria-hidden="true" />
+          <span className="truncate">{active.domain}</span>
         </div>
 
-        {/* Visit live site */}
+        {/* Visit button */}
         <a
-          href={site.url}
+          href={active.url}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1 rounded-md bg-zinc-900 px-2.5 py-1 text-[10.5px] font-medium text-white hover:bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-900 dark:hover:bg-zinc-100"
         >
-          Visit site
+          Visit
           <ExternalLink size={10} aria-hidden="true" />
         </a>
       </div>
 
-      {/* Screenshot */}
-      <div className="relative flex-1 overflow-hidden">
-        <Image
-          src={site.hero}
-          alt="Body & Spirit website screenshot"
-          fill
-          className="object-cover object-top"
-          sizes="720px"
-          priority
-        />
+      {/* Screenshot area — fade on tab change */}
+      <div key={activeId} className="relative flex-1 overflow-hidden" style={{ animation: "safariTabFade 0.2s ease" }}>
+        {!imgError[activeId] ? (
+          <Image
+            src={active.screenshotPath}
+            alt={`${active.domain} screenshot`}
+            fill
+            className="object-cover object-top"
+            sizes="720px"
+            priority
+            onError={() => setImgError((prev) => ({ ...prev, [activeId]: true }))}
+          />
+        ) : (
+          <div className="flex h-full flex-col items-center justify-center gap-3 bg-zinc-50 dark:bg-zinc-800">
+            <p className="text-[13px] font-medium text-zinc-500 dark:text-zinc-400">{active.domain}</p>
+            <a
+              href={active.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-md bg-zinc-900 px-3 py-1.5 text-[12px] font-medium text-white hover:bg-zinc-700 dark:bg-zinc-200 dark:text-zinc-900"
+            >
+              Visit site <ExternalLink size={11} aria-hidden="true" />
+            </a>
+          </div>
+        )}
       </div>
+
+      <style>{`
+        @keyframes safariTabFade {
+          from { opacity: 0.4; }
+          to   { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
