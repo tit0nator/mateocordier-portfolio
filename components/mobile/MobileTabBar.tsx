@@ -2,7 +2,10 @@
 
 import {
   Folder, Compass, PlayCircle, FileText,
-  Code2, Mail, StickyNote, Download, type LucideIcon,
+  Code2, Mail, StickyNote, Download,
+  MessageCircle, BarChart3, Activity,
+  Music, ImageIcon, Crown, Link2, TerminalSquare,
+  type LucideIcon,
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import type { AppId } from "@/lib/store";
@@ -10,14 +13,22 @@ import type { AppId } from "@/lib/store";
 type TabApp = { id: AppId; Icon: LucideIcon; labelKey: string };
 
 const TAB_APPS: TabApp[] = [
-  { id: "finder",     Icon: Folder,      labelKey: "finder" },
-  { id: "safari",     Icon: Compass,     labelKey: "safari" },
-  { id: "mflix",      Icon: PlayCircle,  labelKey: "mflix" },
-  { id: "preview",    Icon: FileText,    labelKey: "preview" },
-  { id: "cursor",     Icon: Code2,       labelKey: "cursor" },
-  { id: "mail",       Icon: Mail,        labelKey: "mail" },
-  { id: "notes",      Icon: StickyNote,  labelKey: "notes" },
-  { id: "resume",     Icon: Download,    labelKey: "resume" },
+  { id: "finder",   Icon: Folder,         labelKey: "finder" },
+  { id: "safari",   Icon: Compass,        labelKey: "safari" },
+  { id: "mflix",    Icon: PlayCircle,     labelKey: "mflix" },
+  { id: "preview",  Icon: FileText,       labelKey: "preview" },
+  { id: "cursor",   Icon: Code2,          labelKey: "cursor" },
+  { id: "terminal", Icon: TerminalSquare, labelKey: "terminal" },
+  { id: "mail",     Icon: Mail,           labelKey: "mail" },
+  { id: "notes",    Icon: StickyNote,     labelKey: "notes" },
+  { id: "messages", Icon: MessageCircle,  labelKey: "messages" },
+  { id: "stocks",   Icon: BarChart3,      labelKey: "stocks" },
+  { id: "strava",   Icon: Activity,       labelKey: "strava" },
+  { id: "deezer",   Icon: Music,          labelKey: "deezer" },
+  { id: "photos",   Icon: ImageIcon,      labelKey: "photos" },
+  { id: "chess",    Icon: Crown,          labelKey: "chess" },
+  { id: "links",    Icon: Link2,          labelKey: "links" },
+  { id: "resume",   Icon: Download,       labelKey: "resume" },
 ];
 
 interface Props {
@@ -47,18 +58,18 @@ export function MobileTabBar({ activeApp, onSelect }: Props) {
     <nav
       aria-label="Tab bar"
       className="shrink-0 border-t border-black/10 backdrop-blur-xl dark:border-white/10"
-      style={{ background: "var(--dock-bg)" }}
+      style={{ background: "var(--dock-bg)", paddingBottom: 12 }}
     >
-      <ul className="flex items-center justify-around px-1 py-1.5">
+      <ul className="flex items-center gap-0.5 overflow-x-auto px-2 py-1.5 scrollbar-none">
         {TAB_APPS.map(({ id, Icon, labelKey }) => {
           const active = id === activeApp;
           return (
-            <li key={id}>
+            <li key={id} className="shrink-0">
               <button
                 type="button"
                 aria-label={t(labelKey)}
                 onClick={() => handleTap(id)}
-                className={`flex flex-col items-center gap-0.5 px-2 py-1 transition-opacity ${
+                className={`flex flex-col items-center gap-0.5 px-1.5 py-1 transition-opacity ${
                   active ? "opacity-100" : "opacity-60 active:opacity-100"
                 }`}
               >
@@ -71,7 +82,7 @@ export function MobileTabBar({ activeApp, onSelect }: Props) {
                 >
                   <Icon size={20} strokeWidth={1.5} aria-hidden="true" />
                 </div>
-                <span className={`text-[9px] ${active ? "font-semibold" : ""}`}>
+                <span className={`text-[9px] whitespace-nowrap ${active ? "font-semibold" : ""}`}>
                   {t(labelKey)}
                 </span>
               </button>

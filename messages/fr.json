@@ -27,7 +27,8 @@
     "photos": "Photos",
     "chess": "Échecs",
     "links": "Liens",
-    "resume": "Resume"
+    "resume": "Resume",
+    "terminal": "Terminal"
   },
   "apps": {
     "notes": {
@@ -66,25 +67,67 @@
         "status": "iMessage"
       },
       "autoPlay": [
-        { "sender": "visitor", "text": "Hey ! J'ai vu ton portfolio — vraiment propre comme travail." },
-        { "sender": "mateo",   "text": "Merci ! Qu'est-ce que tu voudrais savoir ?" },
-        { "sender": "visitor", "text": "Parle-moi de toi — tu fais quoi exactement ?" },
-        { "sender": "mateo",   "text": "Je suis développeur web freelance et stratège marketing basé à Lyon. Je construis des sites à fort taux de conversion et gère des campagnes digitales pour des PME et des créateurs via mon agence, Surge." },
-        { "sender": "visitor", "text": "Cool. Tu travailles avec quels outils ?" },
-        { "sender": "mateo",   "text": "Next.js, React, Tailwind pour le dev. Figma pour le design. En marketing — Meta Ads, Google Ads, séquences email, SEO. J'utilise aussi des outils IA comme Higgsfield pour le contenu vidéo." }
+        {
+          "sender": "visitor",
+          "text": "Hey ! J'ai vu ton portfolio — vraiment propre comme travail."
+        },
+        {
+          "sender": "mateo",
+          "text": "Merci ! Qu'est-ce que tu voudrais savoir ?"
+        },
+        {
+          "sender": "visitor",
+          "text": "Parle-moi de toi — tu fais quoi exactement ?"
+        },
+        {
+          "sender": "mateo",
+          "text": "Je suis développeur web freelance et stratège marketing basé à Lyon. Je construis des sites à fort taux de conversion et gère des campagnes digitales pour des PME et des créateurs via mon agence, Surge."
+        },
+        {
+          "sender": "visitor",
+          "text": "Cool. Tu travailles avec quels outils ?"
+        },
+        {
+          "sender": "mateo",
+          "text": "Next.js, React, Tailwind pour le dev. Figma pour le design. En marketing — Meta Ads, Google Ads, séquences email, SEO. J'utilise aussi des outils IA comme Higgsfield pour le contenu vidéo."
+        }
       ],
       "questions": {
         "round1": [
-          { "question": "Quels projets tu es le plus fier ?", "answer": "Body & Spirit est un coup de cœur — une marque et un site complet pour un studio wellness. RÉSERVE est mon propre concept hôtelier. Et Surge, mon agence, c'est probablement ce dans quoi je m'investis le plus en ce moment." },
-          { "question": "Tu travailles avec des clients internationaux ?", "answer": "Absolument. Je suis bilingue FR/EN et entièrement disponible à distance. J'ai travaillé avec des clients à Montréal et dans toute l'Europe — les fuseaux horaires ne sont pas un obstacle." },
-          { "question": "Quelle est ta disponibilité ?", "answer": "Je prends actuellement de nouveaux projets. Le délai typique dépend de la portée — une landing page peut prendre une semaine, un site complet avec stratégie fait 4–6 semaines." },
-          { "question": "Comment t'as construit ce portfolio ?", "answer": "C'est un concept de bureau macOS construit avec Next.js et Framer Motion pour les animations. Je l'ai construit en une semaine en utilisant Claude Code comme accélérateur IA — c'est un peu un flex en soi." }
+          {
+            "question": "Quels projets tu es le plus fier ?",
+            "answer": "Body & Spirit est un coup de cœur — une marque et un site complet pour un studio wellness. RÉSERVE est mon propre concept hôtelier. Et Surge, mon agence, c'est probablement ce dans quoi je m'investis le plus en ce moment."
+          },
+          {
+            "question": "Tu travailles avec des clients internationaux ?",
+            "answer": "Absolument. Je suis bilingue FR/EN et entièrement disponible à distance. J'ai travaillé avec des clients à Montréal et dans toute l'Europe — les fuseaux horaires ne sont pas un obstacle."
+          },
+          {
+            "question": "Quelle est ta disponibilité ?",
+            "answer": "Je prends actuellement de nouveaux projets. Le délai typique dépend de la portée — une landing page peut prendre une semaine, un site complet avec stratégie fait 4–6 semaines."
+          },
+          {
+            "question": "Comment t'as construit ce portfolio ?",
+            "answer": "C'est un concept de bureau macOS construit avec Next.js et Framer Motion pour les animations. Je l'ai construit en une semaine en utilisant Claude Code comme accélérateur IA — c'est un peu un flex en soi."
+          }
         ],
         "round2": [
-          { "question": "Je peux voir ton CV ?", "answer": "__DOWNLOAD_CV__" },
-          { "question": "Quels sont tes tarifs ?", "answer": "Je travaille au projet, pas à l'heure. Un projet typique commence autour de 2–3K€ pour une landing page et monte ensuite. On peut faire un call de découverte — je te donne un devis précis en 30 min." },
-          { "question": "Comment te contacter ?", "answer": "Le mieux c'est par email : mateo.cordier@gmail.com. Ou trouve-moi sur LinkedIn. Je réponds généralement en quelques heures." },
-          { "question": "C'est quoi la suite pour toi ?", "answer": "Faire grandir Surge, livrer des projets web plus ambitieux, et explorer des produits natifs IA. J'attire les fondateurs et studios qui veulent avancer vite et construire quelque chose de vrai." }
+          {
+            "question": "Je peux voir ton CV ?",
+            "answer": "__DOWNLOAD_CV__"
+          },
+          {
+            "question": "Quels sont tes tarifs ?",
+            "answer": "Je travaille au projet, pas à l'heure. Un projet typique commence autour de 2–3K€ pour une landing page et monte ensuite. On peut faire un call de découverte — je te donne un devis précis en 30 min."
+          },
+          {
+            "question": "Comment te contacter ?",
+            "answer": "Le mieux c'est par email : mateo.cordier@gmail.com. Ou trouve-moi sur LinkedIn. Je réponds généralement en quelques heures."
+          },
+          {
+            "question": "C'est quoi la suite pour toi ?",
+            "answer": "Faire grandir Surge, livrer des projets web plus ambitieux, et explorer des produits natifs IA. J'attire les fondateurs et studios qui veulent avancer vite et construire quelque chose de vrai."
+          }
         ]
       },
       "inputPlaceholder": "iMessage"
@@ -146,6 +189,51 @@
         "wins": "V",
         "losses": "D",
         "draws": "N"
+      }
+    },
+    "terminal": {
+      "welcome": "Bienvenue sur mateo@portfolio\nTape 'help' pour voir les commandes disponibles.\n",
+      "opened": "→ {app} ouvert",
+      "themeToggled": "→ Thème basculé",
+      "themeSet": "→ Thème défini sur {mode}",
+      "themeAlready": "→ Le thème est déjà en mode {mode}",
+      "sudo": "Bien tenté. 😏",
+      "rmrf": "💥 Suppression de tout le portfolio... C'est une blague, détends-toi.",
+      "errors": {
+        "notFound": "{path}: fichier ou dossier introuvable",
+        "notDir": "{path}: n'est pas un dossier",
+        "isDir": "{path}: est un dossier",
+        "usage": "Utilisation : {cmd}",
+        "unknown": "{cmd}: commande introuvable. Tape 'help' pour la liste.",
+        "unknownApp": "{app}: app inconnue. Essaye 'open safari', 'open finder', etc."
+      },
+      "help": {
+        "ls": "Lister le contenu d'un dossier",
+        "cd": "Changer de dossier",
+        "cat": "Afficher le contenu d'un fichier",
+        "pwd": "Afficher le dossier actuel",
+        "open": "Ouvrir une app du portfolio",
+        "theme": "Changer le thème (dark/light/toggle)",
+        "lang": "Changer la langue",
+        "neofetch": "Infos système du portfolio",
+        "whoami": "Qui suis-je ?",
+        "echo": "Afficher du texte",
+        "clear": "Effacer le terminal",
+        "exit": "Fermer le terminal"
+      },
+      "files": {
+        "about": "Mateo Cordier\nDéveloppeur web & créateur de vidéos IA\nLyon, France\n\nJe construis des sites web et je crée des vidéos en IA.\nSouvent pour des marques qui veulent quelque chose\nqui ne ressemble pas à un template.\nAussi pour mes projets — Surge, RÉSERVE.",
+        "skills": "Stack technique :\n\n• Frontend : Next.js, React, Tailwind CSS, Framer Motion\n• Backend : Node.js, Python\n• IA/Vidéo : Higgsfield, RunwayML, Midjourney\n• Design : Figma\n• Outils : Git, Vercel, VS Code",
+        "contact": "Email : mateo.cordier@gmail.com\nLinkedIn : linkedin.com/in/mateocordier\nGitHub : github.com/tit0nator\nMalt : malt.fr/profile/mateocordier\nInstagram : @mateotito19",
+        "projects_surge": "Surge — Agence web\nSite vitrine pour mon agence de création web.\nStack : Next.js, Tailwind, Framer Motion\nURL : lesurge.com",
+        "projects_reserve": "RÉSERVE — E-commerce streetwear\nBoutique en ligne drop-culture pour une épicerie.\nStack : Shopify + thème custom\nURL : réserve.shop",
+        "projects_body_spirit": "Body & Spirit — Site bien-être\nSite vitrine pour une marque de bien-être.\nStack : Next.js, Tailwind\nDémo dans Safari ↗",
+        "projects_pedalos": "Pedalos — Site mobile-first\nSite que j'ai construit pour mon père.\nMobile-friendly, simple et efficace.",
+        "lab_ap_swatch": "AP × Swatch — Vidéo IA\nPièce motion imaginant une collab\nAudemars Piguet × Swatch.\nCréé avec Higgsfield.",
+        "lab_prime": "Prime — Hypermotion\nVidéo hypermotion pour Prime.\nCréé avec Higgsfield.",
+        "lab_fanta": "Fanta — Hypermotion\nVidéo hypermotion pour Fanta.\nCréé avec Higgsfield.",
+        "lab_kiprun": "Kiprun — Vidéo IA\nVidéo pour les chaussures de running Kiprun.\nCréé avec Higgsfield.",
+        "secret": "🎯 Tu as trouvé le fichier secret !\n\nEssaye le code Konami sur le bureau...\n↑ ↑ ↓ ↓ ← → ← → B A"
       }
     }
   }

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(winget install *)",
+      "Bash(choco install *)",
+      "Bash(/c/Users/mateo/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.1.1-full_build/bin/ffmpeg.exe -version)",
+      "Bash(mkdir -p /c/Users/mateo/Documents/Claude/Projects/Portfolio/portfolio/public/lab)",
+      "Bash(mkdir -p /c/Users/mateo/Documents/Claude/Projects/Portfolio/portfolio/public/projects/body-spirit)",
+      "Bash(mkdir -p /c/Users/mateo/Documents/Claude/Projects/Portfolio/portfolio/public/decks)",
+      "Bash(/c/Users/mateo/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.1.1-full_build/bin/ffmpeg.exe -i '/c/Users/mateo/Documents/Claude/Projects/Portfolio/assets-raw/prime hypermotion.mp4' -vcodec libx264 -crf 28 -preset slow -an /c/Users/mateo/Documents/Claude/Projects/Portfolio/portfolio/public/lab/prime.mp4 -y)"
+    ]
+  }
+}

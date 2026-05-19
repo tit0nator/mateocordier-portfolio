@@ -7,7 +7,7 @@ import { useWindowStore, type AppId } from "@/lib/store";
 import { DockIcon } from "./DockIcon";
 
 const DOCK_APPS: AppId[] = [
-  "finder", "safari", "mflix", "preview", "cursor",
+  "finder", "safari", "mflix", "preview", "cursor", "terminal",
   "mail", "notes", "messages", "stocks", "strava",
   "deezer", "photos", "chess", "links",
 ];
@@ -29,10 +29,7 @@ export function Dock() {
   const openApp = useWindowStore((s) => s.openApp);
   const windows = useWindowStore((s) => s.windows);
 
-  // Motion values live in a ref so they're stable across renders (no hooks in loops).
   const scales = useRef<Record<AppId, MotionValue<number>>>(initScales());
-
-  // Refs to icon containers for measuring center X on mousemove.
   const iconRefs = useRef<Partial<Record<AppId, HTMLDivElement>>>({});
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {

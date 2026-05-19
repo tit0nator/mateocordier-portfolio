@@ -8,6 +8,7 @@ export const DOCK_ICON_SRC: Record<AppId, string> = {
   mflix:    "/mflix.png",
   preview:  "/preview.png",
   cursor:   "/mac-cursor-6.png",
+  terminal: "/terminal.png",
   mail:     "/mail.png",
   notes:    "/notes.png",
   messages: "/message.png",

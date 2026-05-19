@@ -27,7 +27,8 @@
     "photos": "Photos",
     "chess": "Chess",
     "links": "Links",
-    "resume": "Resume"
+    "resume": "Resume",
+    "terminal": "Terminal"
   },
   "apps": {
     "notes": {
@@ -66,25 +67,67 @@
         "status": "iMessage"
       },
       "autoPlay": [
-        { "sender": "visitor", "text": "Hey! I saw your portfolio — really clean work." },
-        { "sender": "mateo",   "text": "Thanks! What would you like to know?" },
-        { "sender": "visitor", "text": "Tell me about yourself — what do you do exactly?" },
-        { "sender": "mateo",   "text": "I'm a freelance web developer and marketing strategist based in Lyon, France. I build high-converting websites and run digital campaigns for SMBs and creators through my agency, Surge." },
-        { "sender": "visitor", "text": "That's cool. What tools do you work with?" },
-        { "sender": "mateo",   "text": "Next.js, React, Tailwind for the build. Figma for design. For marketing — Meta Ads, Google Ads, email sequences, SEO. I also use AI tools like Higgsfield for motion content." }
+        {
+          "sender": "visitor",
+          "text": "Hey! I saw your portfolio — really clean work."
+        },
+        {
+          "sender": "mateo",
+          "text": "Thanks! What would you like to know?"
+        },
+        {
+          "sender": "visitor",
+          "text": "Tell me about yourself — what do you do exactly?"
+        },
+        {
+          "sender": "mateo",
+          "text": "I'm a freelance web developer and marketing strategist based in Lyon, France. I build high-converting websites and run digital campaigns for SMBs and creators through my agency, Surge."
+        },
+        {
+          "sender": "visitor",
+          "text": "That's cool. What tools do you work with?"
+        },
+        {
+          "sender": "mateo",
+          "text": "Next.js, React, Tailwind for the build. Figma for design. For marketing — Meta Ads, Google Ads, email sequences, SEO. I also use AI tools like Higgsfield for motion content."
+        }
       ],
       "questions": {
         "round1": [
-          { "question": "What projects are you most proud of?", "answer": "Body & Spirit is a highlight — a full brand and website for a wellness studio. RÉSERVE is my own hospitality concept. And Surge, my agency, is probably where I'm most invested right now." },
-          { "question": "Do you work with international clients?", "answer": "Absolutely. I'm bilingual FR/EN and fully remote-ready. I've worked with clients in Montreal and across Europe — time zones aren't a barrier." },
-          { "question": "What's your availability?", "answer": "I'm currently taking on new projects. Typical turnaround depends on scope — a landing page can be a week, a full site with strategy is 4–6 weeks." },
-          { "question": "How did you build this portfolio?", "answer": "It's a macOS desktop concept built in Next.js with Framer Motion for the animations. I built it in about a week using Claude Code as an AI accelerator — the whole thing is a bit of a flex." }
+          {
+            "question": "What projects are you most proud of?",
+            "answer": "Body & Spirit is a highlight — a full brand and website for a wellness studio. RÉSERVE is my own hospitality concept. And Surge, my agency, is probably where I'm most invested right now."
+          },
+          {
+            "question": "Do you work with international clients?",
+            "answer": "Absolutely. I'm bilingual FR/EN and fully remote-ready. I've worked with clients in Montreal and across Europe — time zones aren't a barrier."
+          },
+          {
+            "question": "What's your availability?",
+            "answer": "I'm currently taking on new projects. Typical turnaround depends on scope — a landing page can be a week, a full site with strategy is 4–6 weeks."
+          },
+          {
+            "question": "How did you build this portfolio?",
+            "answer": "It's a macOS desktop concept built in Next.js with Framer Motion for the animations. I built it in about a week using Claude Code as an AI accelerator — the whole thing is a bit of a flex."
+          }
         ],
         "round2": [
-          { "question": "Can I see your CV?", "answer": "__DOWNLOAD_CV__" },
-          { "question": "What are your rates?", "answer": "I work project-based, not hourly. A typical project starts around €2–3K for a landing page and goes up from there. Let's jump on a discovery call — I can give you a proper estimate in 30 min." },
-          { "question": "Where can I reach you?", "answer": "Best way is email: mateo.cordier@gmail.com. Or find me on LinkedIn. I usually reply within a few hours." },
-          { "question": "What's next for you?", "answer": "Growing Surge, shipping more ambitious web projects, and exploring AI-native products. I'm drawn to founders and studios who want to move fast and build something real." }
+          {
+            "question": "Can I see your CV?",
+            "answer": "__DOWNLOAD_CV__"
+          },
+          {
+            "question": "What are your rates?",
+            "answer": "I work project-based, not hourly. A typical project starts around €2–3K for a landing page and goes up from there. Let's jump on a discovery call — I can give you a proper estimate in 30 min."
+          },
+          {
+            "question": "Where can I reach you?",
+            "answer": "Best way is email: mateo.cordier@gmail.com. Or find me on LinkedIn. I usually reply within a few hours."
+          },
+          {
+            "question": "What's next for you?",
+            "answer": "Growing Surge, shipping more ambitious web projects, and exploring AI-native products. I'm drawn to founders and studios who want to move fast and build something real."
+          }
         ]
       },
       "inputPlaceholder": "iMessage"
@@ -146,6 +189,51 @@
         "wins": "W",
         "losses": "L",
         "draws": "D"
+      }
+    },
+    "terminal": {
+      "welcome": "Welcome to mateo@portfolio\nType 'help' to see available commands.\n",
+      "opened": "→ {app} opened",
+      "themeToggled": "→ Theme toggled",
+      "themeSet": "→ Theme set to {mode}",
+      "themeAlready": "→ Theme is already {mode}",
+      "sudo": "Nice try. 😏",
+      "rmrf": "💥 Deleting entire portfolio... Just kidding, relax.",
+      "errors": {
+        "notFound": "{path}: no such file or directory",
+        "notDir": "{path}: not a directory",
+        "isDir": "{path}: is a directory",
+        "usage": "Usage: {cmd}",
+        "unknown": "{cmd}: command not found. Type 'help' for available commands.",
+        "unknownApp": "{app}: unknown app. Try 'open safari', 'open finder', etc."
+      },
+      "help": {
+        "ls": "List directory contents",
+        "cd": "Change directory",
+        "cat": "Display file contents",
+        "pwd": "Print working directory",
+        "open": "Open a portfolio app",
+        "theme": "Switch theme (dark/light/toggle)",
+        "lang": "Switch language",
+        "neofetch": "Portfolio system info",
+        "whoami": "Who am I?",
+        "echo": "Print text",
+        "clear": "Clear the terminal",
+        "exit": "Close the terminal"
+      },
+      "files": {
+        "about": "Mateo Cordier\nWeb Developer & AI Video Creator\nLyon, France\n\nI build websites and create AI-powered videos.\nUsually for brands that want something that\ndoesn't look like a template.\nAlso for my own projects — Surge, RÉSERVE.",
+        "skills": "Tech Stack:\n\n• Frontend: Next.js, React, Tailwind CSS, Framer Motion\n• Backend: Node.js, Python\n• AI/Video: Higgsfield, RunwayML, Midjourney\n• Design: Figma\n• Tools: Git, Vercel, VS Code",
+        "contact": "Email: mateo.cordier@gmail.com\nLinkedIn: linkedin.com/in/mateocordier\nGitHub: github.com/tit0nator\nMalt: malt.fr/profile/mateocordier\nInstagram: @mateotito19",
+        "projects_surge": "Surge — Web Agency\nShowcase site for my web creation agency.\nStack: Next.js, Tailwind, Framer Motion\nURL: lesurge.com",
+        "projects_reserve": "RÉSERVE — Streetwear E-commerce\nDrop-culture online store for a corner shop.\nStack: Shopify + custom theme\nURL: réserve.shop",
+        "projects_body_spirit": "Body & Spirit — Wellness Site\nShowcase site for a wellness brand.\nStack: Next.js, Tailwind\nDemo in Safari ↗",
+        "projects_pedalos": "Pedalos — Mobile-First Site\nSite I built for my dad.\nMobile-friendly, simple and effective.",
+        "lab_ap_swatch": "AP × Swatch — AI Video\nMotion piece imagining an\nAudemars Piguet × Swatch collab.\nCreated with Higgsfield.",
+        "lab_prime": "Prime — Hypermotion\nHypermotion video for Prime.\nCreated with Higgsfield.",
+        "lab_fanta": "Fanta — Hypermotion\nHypermotion video for Fanta.\nCreated with Higgsfield.",
+        "lab_kiprun": "Kiprun — AI Video\nVideo for Kiprun running shoes.\nCreated with Higgsfield.",
+        "secret": "🎯 You found the secret file!\n\nTry the Konami code on the desktop...\n↑ ↑ ↓ ↓ ← → ← → B A"
       }
     }
   }

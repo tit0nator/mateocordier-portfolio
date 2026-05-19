@@ -7,6 +7,7 @@ import { MFlix } from "./MFlix";
 import { Safari } from "./Safari";
 import { Preview } from "./Preview";
 import { Cursor } from "./Cursor";
+import { Terminal } from "./Terminal";
 import { Mail } from "./Mail";
 import { Messages } from "./Messages";
 import { Stocks } from "./Stocks";
@@ -30,6 +31,7 @@ export const APP_REGISTRY: Partial<Record<AppId, AppEntry>> = {
   mflix:    { Component: MFlix,    titleKey: "mflix"    },
   preview:  { Component: Preview,  titleKey: "preview"  },
   cursor:   { Component: Cursor,   titleKey: "cursor"   },
+  terminal: { Component: Terminal, titleKey: "terminal" },
   mail:     { Component: Mail,     titleKey: "mail"     },
   messages: { Component: Messages, titleKey: "messages" },
   stocks:   { Component: Stocks,   titleKey: "stocks"   },
@@ -38,6 +40,4 @@ export const APP_REGISTRY: Partial<Record<AppId, AppEntry>> = {
   photos:   { Component: Photos,   titleKey: "photos"   },
   chess:    { Component: Chess,    titleKey: "chess"    },
   links:    { Component: Links,    titleKey: "links"    },
-  // "resume" is intentionally absent — clicking the resume dock icon triggers
-  // a PDF download, it never opens a window.
 };
