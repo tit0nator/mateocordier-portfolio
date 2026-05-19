@@ -15,7 +15,7 @@
   "dock": {
     "finder": "Finder",
     "safari": "Safari",
-    "titoflix": "TitoFlix",
+    "mflix": "mFlix",
     "preview": "Preview",
     "cursor": "Cursor",
     "mail": "Mail",
@@ -56,6 +56,65 @@
       "send": "Send",
       "sent": "Message ready — your mail client should open.",
       "back": "New message"
+    },
+    "messages": {
+      "header": {
+        "name": "Mateo Cordier",
+        "status": "iMessage"
+      },
+      "autoPlay": [
+        { "sender": "visitor", "text": "Hey! I saw your portfolio — really clean work." },
+        { "sender": "mateo",   "text": "Thanks! What would you like to know?" },
+        { "sender": "visitor", "text": "Tell me about yourself — what do you do exactly?" },
+        { "sender": "mateo",   "text": "I'm a freelance web developer and marketing strategist based in Lyon, France. I build high-converting websites and run digital campaigns for SMBs and creators through my agency, Surge." },
+        { "sender": "visitor", "text": "That's cool. What tools do you work with?" },
+        { "sender": "mateo",   "text": "Next.js, React, Tailwind for the build. Figma for design. For marketing — Meta Ads, Google Ads, email sequences, SEO. I also use AI tools like Higgsfield for motion content." }
+      ],
+      "questions": {
+        "round1": [
+          { "question": "What projects are you most proud of?", "answer": "Body & Spirit is a highlight — a full brand and website for a wellness studio. RÉSERVE is my own hospitality concept. And Surge, my agency, is probably where I'm most invested right now." },
+          { "question": "Do you work with international clients?", "answer": "Absolutely. I'm bilingual FR/EN and fully remote-ready. I've worked with clients in Montreal and across Europe — time zones aren't a barrier." },
+          { "question": "What's your availability?", "answer": "I'm currently taking on new projects. Typical turnaround depends on scope — a landing page can be a week, a full site with strategy is 4–6 weeks." },
+          { "question": "How did you build this portfolio?", "answer": "It's a macOS desktop concept built in Next.js with Framer Motion for the animations. I built it in about a week using Claude Code as an AI accelerator — the whole thing is a bit of a flex." }
+        ],
+        "round2": [
+          { "question": "Can I see your CV?", "answer": "__DOWNLOAD_CV__" },
+          { "question": "What are your rates?", "answer": "I work project-based, not hourly. A typical project starts around €2–3K for a landing page and goes up from there. Let's jump on a discovery call — I can give you a proper estimate in 30 min." },
+          { "question": "Where can I reach you?", "answer": "Best way is email: mateo.cordier@gmail.com. Or find me on LinkedIn. I usually reply within a few hours." },
+          { "question": "What's next for you?", "answer": "Growing Surge, shipping more ambitious web projects, and exploring AI-native products. I'm drawn to founders and studios who want to move fast and build something real." }
+        ]
+      },
+      "inputPlaceholder": "iMessage"
+    },
+    "mflix": {
+      "title": "mFlix",
+      "playButton": "Play",
+      "sectionLabel": "All Creations"
+    },
+    "stocks": {
+      "headline": "Projects Shipped",
+      "metrics": {
+        "portfolioViews": "Portfolio Views",
+        "projectsShipped": "Projects Shipped",
+        "clientSatisfaction": "Client Satisfaction",
+        "linkedinFollowers": "LinkedIn Followers",
+        "githubContributions": "GitHub Contributions",
+        "responseTime": "Response Time",
+        "maltScore": "Malt Score",
+        "languages": "Languages"
+      }
+    },
+    "strava": {
+      "weekSummary": "This Week",
+      "viewOnStrava": "View on Strava",
+      "activityTypes": {
+        "run": "Run",
+        "ride": "Ride",
+        "hike": "Hike"
+      }
+    },
+    "links": {
+      "tagline": "Freelance Dev & Marketing · Lyon"
     }
   }
 }

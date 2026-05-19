@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useMotionValue, useTransform, MotionValue } from "framer-motion";
+import Image from "next/image";
+import { motion, useTransform, type MotionValue } from "framer-motion";
 import type { AppId } from "@/lib/store";
-import { DOCK_ICON_MAP } from "./dock-icons";
+import { DOCK_ICON_SRC } from "./dock-icons";
 
 interface DockIconProps {
   id: AppId;
@@ -13,11 +14,9 @@ interface DockIconProps {
 }
 
 export function DockIcon({ id, label, scaleValue, isOpen, onClick }: DockIconProps) {
-  const IconComponent = DOCK_ICON_MAP[id];
   const BASE = 48;
-
-  // Derive pixel size from scale so the icon graphic scales too
   const iconSize = useTransform(scaleValue, (s) => Math.round(BASE * s));
+  const src = DOCK_ICON_SRC[id];
 
   return (
     <div className="group relative flex flex-col items-center" style={{ paddingBottom: 6 }}>
@@ -29,17 +28,22 @@ export function DockIcon({ id, label, scaleValue, isOpen, onClick }: DockIconPro
         {label}
       </div>
 
-      {/* Icon */}
+      {/* Icon — size drives magnification; no CSS scale (avoids double-scale) */}
       <motion.button
         type="button"
         aria-label={label}
         onClick={onClick}
-        style={{ scale: scaleValue, transformOrigin: "bottom center" }}
-        className="flex items-center justify-center active:brightness-90 transition-[filter] duration-75"
+        style={{ width: iconSize, height: iconSize, position: "relative" }}
+        className="flex items-end justify-center active:brightness-90 transition-[filter] duration-75 shrink-0"
       >
-        <motion.div style={{ width: iconSize, height: iconSize }}>
-          <IconComponent size={BASE} />
-        </motion.div>
+        <Image
+          src={src}
+          alt=""
+          fill
+          sizes="72px"
+          className="object-contain drop-shadow-sm"
+          draggable={false}
+        />
       </motion.button>
 
       {/* Open indicator dot */}

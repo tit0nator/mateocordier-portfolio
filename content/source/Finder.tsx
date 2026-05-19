@@ -31,7 +31,7 @@ export function Finder(_: { windowId: string }) {
       return;
     }
     if (project.folder === "lab") {
-      openApp("titoflix", { data: { videoId: project.id } });
+      openApp("mflix", { data: { videoId: project.id } });
       return;
     }
     if (project.folder === "decks") {

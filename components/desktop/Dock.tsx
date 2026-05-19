@@ -7,7 +7,7 @@ import { useWindowStore, type AppId } from "@/lib/store";
 import { DockIcon } from "./DockIcon";
 
 const DOCK_APPS: AppId[] = [
-  "finder", "safari", "titoflix", "preview", "cursor",
+  "finder", "safari", "mflix", "preview", "cursor",
   "mail", "notes", "messages", "stocks", "strava", "links",
 ];
 const ALL_APPS: AppId[] = [...DOCK_APPS, "resume"];

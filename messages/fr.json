@@ -15,7 +15,7 @@
   "dock": {
     "finder": "Finder",
     "safari": "Safari",
-    "titoflix": "TitoFlix",
+    "mflix": "mFlix",
     "preview": "Preview",
     "cursor": "Cursor",
     "mail": "Mail",
@@ -56,6 +56,65 @@
       "send": "Envoyer",
       "sent": "Message prêt — ton client mail devrait s'ouvrir.",
       "back": "Nouveau message"
+    },
+    "messages": {
+      "header": {
+        "name": "Mateo Cordier",
+        "status": "iMessage"
+      },
+      "autoPlay": [
+        { "sender": "visitor", "text": "Hey ! J'ai vu ton portfolio — vraiment propre comme travail." },
+        { "sender": "mateo",   "text": "Merci ! Qu'est-ce que tu voudrais savoir ?" },
+        { "sender": "visitor", "text": "Parle-moi de toi — tu fais quoi exactement ?" },
+        { "sender": "mateo",   "text": "Je suis développeur web freelance et stratège marketing basé à Lyon. Je construis des sites à fort taux de conversion et gère des campagnes digitales pour des PME et des créateurs via mon agence, Surge." },
+        { "sender": "visitor", "text": "Cool. Tu travailles avec quels outils ?" },
+        { "sender": "mateo",   "text": "Next.js, React, Tailwind pour le dev. Figma pour le design. En marketing — Meta Ads, Google Ads, séquences email, SEO. J'utilise aussi des outils IA comme Higgsfield pour le contenu vidéo." }
+      ],
+      "questions": {
+        "round1": [
+          { "question": "Quels projets tu es le plus fier ?", "answer": "Body & Spirit est un coup de cœur — une marque et un site complet pour un studio wellness. RÉSERVE est mon propre concept hôtelier. Et Surge, mon agence, c'est probablement ce dans quoi je m'investis le plus en ce moment." },
+          { "question": "Tu travailles avec des clients internationaux ?", "answer": "Absolument. Je suis bilingue FR/EN et entièrement disponible à distance. J'ai travaillé avec des clients à Montréal et dans toute l'Europe — les fuseaux horaires ne sont pas un obstacle." },
+          { "question": "Quelle est ta disponibilité ?", "answer": "Je prends actuellement de nouveaux projets. Le délai typique dépend de la portée — une landing page peut prendre une semaine, un site complet avec stratégie fait 4–6 semaines." },
+          { "question": "Comment t'as construit ce portfolio ?", "answer": "C'est un concept de bureau macOS construit avec Next.js et Framer Motion pour les animations. Je l'ai construit en une semaine en utilisant Claude Code comme accélérateur IA — c'est un peu un flex en soi." }
+        ],
+        "round2": [
+          { "question": "Je peux voir ton CV ?", "answer": "__DOWNLOAD_CV__" },
+          { "question": "Quels sont tes tarifs ?", "answer": "Je travaille au projet, pas à l'heure. Un projet typique commence autour de 2–3K€ pour une landing page et monte ensuite. On peut faire un call de découverte — je te donne un devis précis en 30 min." },
+          { "question": "Comment te contacter ?", "answer": "Le mieux c'est par email : mateo.cordier@gmail.com. Ou trouve-moi sur LinkedIn. Je réponds généralement en quelques heures." },
+          { "question": "C'est quoi la suite pour toi ?", "answer": "Faire grandir Surge, livrer des projets web plus ambitieux, et explorer des produits natifs IA. J'attire les fondateurs et studios qui veulent avancer vite et construire quelque chose de vrai." }
+        ]
+      },
+      "inputPlaceholder": "iMessage"
+    },
+    "mflix": {
+      "title": "mFlix",
+      "playButton": "Lecture",
+      "sectionLabel": "Toutes les créations"
+    },
+    "stocks": {
+      "headline": "Projets livrés",
+      "metrics": {
+        "portfolioViews": "Vues portfolio",
+        "projectsShipped": "Projets livrés",
+        "clientSatisfaction": "Satisfaction client",
+        "linkedinFollowers": "Abonnés LinkedIn",
+        "githubContributions": "Contributions GitHub",
+        "responseTime": "Temps de réponse",
+        "maltScore": "Note Malt",
+        "languages": "Langues"
+      }
+    },
+    "strava": {
+      "weekSummary": "Cette semaine",
+      "viewOnStrava": "Voir sur Strava",
+      "activityTypes": {
+        "run": "Course",
+        "ride": "Vélo",
+        "hike": "Randonnée"
+      }
+    },
+    "links": {
+      "tagline": "Dev & Marketing freelance · Lyon"
     }
   }
 }

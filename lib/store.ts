@@ -3,7 +3,7 @@ import { create } from "zustand";
 export type AppId =
   | "finder"
   | "safari"
-  | "titoflix"
+  | "mflix"
   | "preview"
   | "cursor"
   | "mail"
@@ -39,7 +39,7 @@ interface WindowStore {
 const DEFAULT_SIZES: Record<AppId, { width: number; height: number }> = {
   finder: { width: 720, height: 460 },
   safari: { width: 720, height: 480 },
-  titoflix: { width: 520, height: 360 },
+  mflix: { width: 640, height: 420 },
   preview: { width: 560, height: 740 },
   cursor: { width: 700, height: 460 },
   mail: { width: 460, height: 420 },
