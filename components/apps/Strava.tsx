@@ -126,7 +126,7 @@ export function Strava(_: { windowId: string }) {
         {/* View on Strava CTA */}
         <button
           type="button"
-          onClick={() => window.open("https://www.strava.com/athletes/mateo-cordier", "_blank", "noopener,noreferrer")}
+          onClick={() => window.open("https://strava.app.link/Cs1xdDaWg3b", "_blank", "noopener,noreferrer")}
           className="w-full rounded-xl py-2.5 text-[12px] font-semibold text-white transition-opacity hover:opacity-90 active:opacity-75"
           style={{ background: "#FC4C02" }}
         >

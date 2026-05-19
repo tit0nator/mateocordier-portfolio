@@ -86,7 +86,7 @@ const LINKS: LinkItem[] = [
   {
     id: "instagram",
     platform: "Instagram",
-    url: "https://instagram.com/mateocordier",
+    url: "https://www.instagram.com/mateotito19/",
     accentColor: "#E4405F",
     icon: <InstagramIcon />,
   },
