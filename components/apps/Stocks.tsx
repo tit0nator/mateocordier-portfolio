@@ -21,8 +21,8 @@ function Sparkline({ data, trend }: { data: number[]; trend: Stat["trend"] }) {
   const min = Math.min(...data);
   const max = Math.max(...data);
   const range = max - min || 1;
-  const W = 50;
-  const H = 20;
+  const W = 52;
+  const H = 22;
   const xStep = W / (data.length - 1);
 
   const points = data
@@ -49,17 +49,17 @@ function StatCard({ stat }: { stat: Stat }) {
 
   return (
     <div
-      className="flex flex-col gap-1 rounded-xl p-3"
+      className="flex flex-col gap-1.5 rounded-xl p-3"
       style={{ background: "#2c2c2e" }}
     >
       <p className="text-[10px] font-medium uppercase tracking-wide" style={{ color: "#8e8e93" }}>
         {t(stat.labelKey as Parameters<typeof t>[0])}
       </p>
-      <p className="text-[20px] font-bold leading-none text-white">
+      <p className="text-[22px] font-bold leading-none tracking-tight text-white">
         {stat.value}
       </p>
-      <div className="flex items-center justify-between">
-        <span className="text-[10px]" style={{ color }}>
+      <div className="flex items-center justify-between pt-0.5">
+        <span className="text-[10px] font-medium" style={{ color }}>
           {TREND_ARROW[stat.trend]} {stat.trendLabel}
         </span>
         <Sparkline data={stat.sparkline} trend={stat.trend} />
@@ -77,15 +77,15 @@ export function Stocks(_: { windowId: string }) {
       style={{ background: "#1c1c1e", color: "#e5e5e5" }}
     >
       {/* Header */}
-      <div className="shrink-0 px-4 pt-4 pb-3">
-        <h1 className="text-[22px] font-bold leading-tight text-white">
+      <div className="shrink-0 px-4 pt-4 pb-1">
+        <h1 className="text-[24px] font-bold leading-tight tracking-tight text-white">
           Mateo Cordier
         </h1>
-        <p className="mt-0.5 text-[11px]" style={{ color: "#8e8e93" }}>
+        <p className="mt-0.5 text-[11px] font-medium" style={{ color: "#8e8e93" }}>
           Freelance Dev & Marketing · Lyon, FR
         </p>
-        <div className="mt-2.5 flex items-baseline gap-1.5">
-          <span className="text-[28px] font-bold text-white">12</span>
+        <div className="mt-3 flex items-baseline gap-2">
+          <span className="text-[32px] font-bold tracking-tight text-white">12</span>
           <span
             className="rounded-md px-1.5 py-0.5 text-[11px] font-semibold"
             style={{ background: "rgba(52,199,89,0.15)", color: "#34C759" }}
@@ -95,8 +95,11 @@ export function Stocks(_: { windowId: string }) {
         </div>
       </div>
 
+      {/* Divider */}
+      <div className="mx-4 my-3 h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+
       {/* Stats grid */}
-      <div className="grid grid-cols-2 gap-2 px-3 pb-4">
+      <div className="grid grid-cols-2 gap-2.5 px-3.5 pb-4">
         {STATS.map((stat) => (
           <StatCard key={stat.id} stat={stat} />
         ))}

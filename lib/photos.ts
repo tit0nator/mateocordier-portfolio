@@ -14,34 +14,20 @@ export const ALBUMS: Album[] = [
   { id: "all",    labelKey: "all"    },
   { id: "travel", labelKey: "travel" },
   { id: "street", labelKey: "street" },
-  { id: "lyon",   labelKey: "lyon"   },
-  { id: "food",   labelKey: "food"   },
 ];
-
-// Placeholder photos using solid-color data URIs until Mateo uploads real ones.
-// Replace src values with /photos/<album>/<filename>.jpg when ready.
-const PLACEHOLDER_COLORS = [
-  "#3b82f6", "#8b5cf6", "#ec4899", "#f59e0b",
-  "#10b981", "#6366f1", "#ef4444", "#14b8a6",
-  "#f97316", "#84cc16", "#06b6d4", "#a855f7",
-];
-
-function placeholder(color: string) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="400" height="400" fill="${color}"/></svg>`;
-  return `data:image/svg+xml;base64,${btoa(svg)}`;
-}
 
 export const PHOTOS: Photo[] = [
-  { id: "t1",  src: placeholder(PLACEHOLDER_COLORS[0]),  album: "travel", caption: "Tokyo, 2024" },
-  { id: "t2",  src: placeholder(PLACEHOLDER_COLORS[1]),  album: "travel", caption: "Lisbon, 2023" },
-  { id: "t3",  src: placeholder(PLACEHOLDER_COLORS[2]),  album: "travel", caption: "Montreal, 2022" },
-  { id: "s1",  src: placeholder(PLACEHOLDER_COLORS[3]),  album: "street", caption: "Croix-Rousse" },
-  { id: "s2",  src: placeholder(PLACEHOLDER_COLORS[4]),  album: "street", caption: "Bellecour" },
-  { id: "s3",  src: placeholder(PLACEHOLDER_COLORS[5]),  album: "street", caption: "Confluence" },
-  { id: "l1",  src: placeholder(PLACEHOLDER_COLORS[6]),  album: "lyon",   caption: "Presqu'île" },
-  { id: "l2",  src: placeholder(PLACEHOLDER_COLORS[7]),  album: "lyon",   caption: "Fourvière" },
-  { id: "l3",  src: placeholder(PLACEHOLDER_COLORS[8]),  album: "lyon",   caption: "Tête d'Or" },
-  { id: "f1",  src: placeholder(PLACEHOLDER_COLORS[9]),  album: "food",   caption: "Bouchon lyonnais" },
-  { id: "f2",  src: placeholder(PLACEHOLDER_COLORS[10]), album: "food",   caption: "Ramen" },
-  { id: "f3",  src: placeholder(PLACEHOLDER_COLORS[11]), album: "food",   caption: "Brunch" },
+  // Travel
+  { id: "t1", src: "/photos/travel/barcelona.jpg",       album: "travel", caption: "Barcelona" },
+  { id: "t2", src: "/photos/travel/mountain-sunset.jpg", album: "travel", caption: "Alpes" },
+  { id: "t3", src: "/photos/travel/lake-sunset.jpg",     album: "travel", caption: "Lac, été" },
+  // Street / film
+  { id: "s1", src: "/photos/street/interior.jpg",        album: "street", caption: "Morning light" },
+  { id: "s2", src: "/photos/street/bokeh-night.jpg",     album: "street", caption: "Nuit" },
+  { id: "s3", src: "/photos/street/light-trails.jpg",    album: "street", caption: "Light trails" },
+  { id: "s4", src: "/photos/street/evan-st.jpg",         album: "street", caption: "E VAN ST" },
+  { id: "s5", src: "/photos/street/jordan-1.jpg",        album: "street", caption: "Air Jordan 1" },
+  { id: "s6", src: "/photos/street/e-10th.jpg",          album: "street", caption: "E 10th" },
+  { id: "s7", src: "/photos/street/jordan-3.jpg",        album: "street", caption: "Air Jordan 3" },
+  { id: "s8", src: "/photos/street/damn-poster.jpg",     album: "street", caption: "DAMN." },
 ];

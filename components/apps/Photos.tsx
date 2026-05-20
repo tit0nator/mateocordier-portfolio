@@ -36,7 +36,8 @@ function Lightbox({
 
   return (
     <div
-      className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/90"
+      className="absolute inset-0 z-50 flex flex-col items-center justify-center"
+      style={{ background: "rgba(0,0,0,0.92)" }}
       onClick={onClose}
     >
       {/* Image */}
@@ -58,7 +59,7 @@ function Lightbox({
               type="button"
               onClick={prev}
               aria-label="Previous"
-              className="absolute -left-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/40"
+              className="absolute -left-12 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[16px] text-white/80 backdrop-blur-sm transition-colors hover:bg-white/20"
             >
               ‹
             </button>
@@ -66,7 +67,7 @@ function Lightbox({
               type="button"
               onClick={next}
               aria-label="Next"
-              className="absolute -right-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/40"
+              className="absolute -right-12 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[16px] text-white/80 backdrop-blur-sm transition-colors hover:bg-white/20"
             >
               ›
             </button>
@@ -74,18 +75,21 @@ function Lightbox({
         )}
       </div>
 
-      {/* Caption */}
-      {p.caption && (
-        <p className="mt-3 text-[12px] text-white/70" onClick={(e) => e.stopPropagation()}>
-          {p.caption}
+      {/* Caption + counter */}
+      <div className="mt-3 flex flex-col items-center gap-1" onClick={(e) => e.stopPropagation()}>
+        {p.caption && (
+          <p className="text-[12px] font-medium text-white/70">{p.caption}</p>
+        )}
+        <p className="text-[10px] text-white/40">
+          {current + 1} / {photos.length}
         </p>
-      )}
+      </div>
 
       {/* Close */}
       <button
         type="button"
         onClick={onClose}
-        className="absolute top-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-white hover:bg-white/40 text-[14px]"
+        className="absolute top-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-[13px] text-white/80 backdrop-blur-sm transition-colors hover:bg-white/20"
         aria-label={t("close")}
       >
         ✕
@@ -135,24 +139,30 @@ export function Photos(_: { windowId: string }) {
       </VibrancySidebar>
 
       {/* Grid */}
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto bg-white dark:bg-zinc-900">
         <div
-          className="grid p-0.5"
-          style={{ gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}
+          className="grid p-1"
+          style={{ gridTemplateColumns: "repeat(3, 1fr)", gap: 3 }}
         >
           {visiblePhotos.map((photo) => (
             <button
               key={photo.id}
               type="button"
               onClick={() => setLightboxPhoto(photo)}
-              className="group relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800"
+              className="group relative aspect-square overflow-hidden rounded-[2px] bg-zinc-100 dark:bg-zinc-800"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={photo.src}
                 alt={photo.caption ?? ""}
-                className="h-full w-full object-cover transition-[filter] duration-150 group-hover:brightness-110"
+                className="h-full w-full object-cover transition-all duration-200 group-hover:brightness-110 group-hover:scale-[1.02]"
               />
+              {/* Caption on hover */}
+              {photo.caption && (
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-black/60 to-transparent px-2 pb-1.5 pt-4 transition-transform duration-200 group-hover:translate-y-0">
+                  <p className="text-[9.5px] font-medium text-white/90">{photo.caption}</p>
+                </div>
+              )}
             </button>
           ))}
         </div>

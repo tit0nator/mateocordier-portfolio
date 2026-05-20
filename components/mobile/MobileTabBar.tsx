@@ -2,7 +2,7 @@
 
 import {
   Folder, Compass, PlayCircle, FileText,
-  Code2, Mail, StickyNote, Download,
+  Mail, StickyNote, Download,
   MessageCircle, BarChart3, Activity,
   Music, ImageIcon, Crown, Link2, TerminalSquare,
   type LucideIcon,
@@ -17,7 +17,6 @@ const TAB_APPS: TabApp[] = [
   { id: "safari",   Icon: Compass,        labelKey: "safari" },
   { id: "mflix",    Icon: PlayCircle,     labelKey: "mflix" },
   { id: "preview",  Icon: FileText,       labelKey: "preview" },
-  { id: "cursor",   Icon: Code2,          labelKey: "cursor" },
   { id: "terminal", Icon: TerminalSquare, labelKey: "terminal" },
   { id: "mail",     Icon: Mail,           labelKey: "mail" },
   { id: "notes",    Icon: StickyNote,     labelKey: "notes" },

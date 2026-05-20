@@ -103,45 +103,49 @@ export function Links(_: { windowId: string }) {
   const t = useTranslations("apps.links");
 
   return (
-    <div className="flex h-full flex-col items-center overflow-y-auto bg-white px-5 py-6 dark:bg-zinc-900">
-      {/* Avatar */}
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#007AFF] text-[22px] font-bold text-white shadow-md">
-        MC
+    <div className="flex h-full flex-col overflow-y-auto bg-white dark:bg-zinc-900">
+      {/* Profile header */}
+      <div className="flex flex-col items-center px-5 pt-7 pb-5">
+        <div
+          className="flex h-[72px] w-[72px] items-center justify-center rounded-full text-[24px] font-bold text-white shadow-lg"
+          style={{
+            background: "linear-gradient(135deg, #007AFF, #5856D6)",
+          }}
+        >
+          MC
+        </div>
+        <p className="mt-3 text-[16px] font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Mateo Cordier
+        </p>
+        <p className="mt-0.5 text-[12px] text-zinc-500 dark:text-zinc-400">
+          {t("tagline")}
+        </p>
       </div>
 
-      {/* Name + tagline */}
-      <p className="mt-3 text-[15px] font-semibold text-zinc-900 dark:text-zinc-100">
-        Mateo Cordier
-      </p>
-      <p className="mt-0.5 text-[11.5px] text-zinc-500 dark:text-zinc-400">
-        {t("tagline")}
-      </p>
-
-      {/* Link pills */}
-      <div className="mt-5 w-full space-y-2">
+      {/* Link list */}
+      <div className="flex flex-col gap-2 px-5 pb-6">
         {LINKS.map((link) => (
           <button
             key={link.id}
             type="button"
             onClick={() => window.open(link.url, "_blank", "noopener,noreferrer")}
-            className="group flex w-full items-center gap-3 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 py-2.5 pl-0 pr-3 text-left transition-all hover:scale-[1.02] hover:bg-zinc-100 active:scale-100 dark:border-zinc-800 dark:bg-zinc-800/60 dark:hover:bg-zinc-700/60"
-            style={{ borderLeft: `3px solid ${link.accentColor}` }}
+            className="group flex w-full items-center gap-3 rounded-xl border border-zinc-100 bg-zinc-50/80 px-3.5 py-3 text-left transition-all duration-150 hover:bg-zinc-100 hover:shadow-sm active:scale-[0.98] dark:border-zinc-800 dark:bg-zinc-800/50 dark:hover:bg-zinc-800"
           >
-            {/* Icon */}
+            {/* Icon circle */}
             <div
-              className="flex w-10 shrink-0 items-center justify-center"
-              style={{ color: link.accentColor }}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+              style={{ background: `${link.accentColor}12`, color: link.accentColor }}
             >
               {link.icon}
             </div>
 
-            {/* Name */}
+            {/* Label */}
             <span className="flex-1 text-[13px] font-medium text-zinc-800 dark:text-zinc-200">
               {link.platform}
             </span>
 
             {/* Arrow */}
-            <span className="text-zinc-400 transition-colors group-hover:text-zinc-600 dark:text-zinc-600 dark:group-hover:text-zinc-400">
+            <span className="text-zinc-300 transition-colors group-hover:text-zinc-500 dark:text-zinc-600 dark:group-hover:text-zinc-400">
               <ExternalArrow />
             </span>
           </button>

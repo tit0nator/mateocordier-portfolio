@@ -7,7 +7,7 @@ import { useWindowStore, type AppId } from "@/lib/store";
 import { DockIcon } from "./DockIcon";
 
 const DOCK_APPS: AppId[] = [
-  "finder", "safari", "mflix", "preview", "cursor", "terminal",
+  "finder", "safari", "mflix", "preview", "terminal",
   "mail", "notes", "messages", "stocks", "strava",
   "deezer", "photos", "chess", "links",
 ];
@@ -81,7 +81,7 @@ export function Dock() {
           border: "0.5px solid var(--glass-border)",
           borderRadius: "var(--radius-dock)",
           boxShadow: "var(--shadow-dock)",
-          gap: 2,
+          gap: 4,
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}

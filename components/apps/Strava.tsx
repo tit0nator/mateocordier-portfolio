@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ACTIVITIES as FALLBACK_ACTIVITIES, type Activity } from "@/lib/strava";
 
+const STRAVA_ORANGE = "#FC4C02";
+
 const ACTIVITY_EMOJI: Record<Activity["type"], string> = {
   run:  "\u{1F3C3}",
   ride: "\u{1F6B4}",
@@ -22,18 +24,18 @@ function RouteSquiggle({ index }: { index: number }) {
   const path = ROUTE_PATHS[index % ROUTE_PATHS.length];
   return (
     <div
-      className="flex-shrink-0 overflow-hidden rounded-md"
-      style={{ width: 80, height: 48, background: "rgba(252,76,2,0.08)" }}
+      className="shrink-0 overflow-hidden rounded-lg"
+      style={{ width: 72, height: 44, background: "rgba(252,76,2,0.06)" }}
     >
-      <svg width="80" height="48" viewBox="0 0 100 60" fill="none" aria-hidden="true">
+      <svg width="72" height="44" viewBox="0 0 100 60" fill="none" aria-hidden="true">
         <path
           d={path}
-          stroke="#FC4C02"
+          stroke={STRAVA_ORANGE}
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
-          opacity="0.85"
+          opacity="0.8"
         />
       </svg>
     </div>
@@ -42,7 +44,7 @@ function RouteSquiggle({ index }: { index: number }) {
 
 function SkeletonCard() {
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-700/60 dark:bg-zinc-800/70 animate-pulse">
+    <div className="flex flex-col gap-2.5 rounded-xl bg-zinc-50 p-3.5 dark:bg-zinc-800/60 animate-pulse">
       <div className="h-4 w-3/4 rounded bg-zinc-200 dark:bg-zinc-700" />
       <div className="h-3 w-1/2 rounded bg-zinc-200 dark:bg-zinc-700" />
       <div className="h-10 w-20 rounded bg-zinc-200 dark:bg-zinc-700" />
@@ -51,32 +53,29 @@ function SkeletonCard() {
 }
 
 function ActivityCard({ activity }: { activity: Activity }) {
-  const t = useTranslations("apps.strava");
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-zinc-200 bg-white p-3 shadow-sm dark:border-zinc-700/60 dark:bg-zinc-800/70">
-      <div className="flex items-start gap-2">
-        <span className="text-[15px]" role="img" aria-label={activity.type}>
+    <div className="flex flex-col gap-2.5 rounded-xl bg-zinc-50 p-3.5 transition-colors hover:bg-zinc-100 dark:bg-zinc-800/50 dark:hover:bg-zinc-800/80">
+      <div className="flex items-start gap-2.5">
+        <span className="text-[14px]" role="img" aria-label={activity.type}>
           {ACTIVITY_EMOJI[activity.type]}
         </span>
-        <p className="flex-1 text-[12.5px] font-semibold leading-tight text-zinc-900 dark:text-zinc-100">
-          {activity.title}
-        </p>
-      </div>
-      <div className="flex items-center gap-3 text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
-        <span>{activity.distance}</span>
-        <span className="text-zinc-300 dark:text-zinc-600">&middot;</span>
-        <span>{activity.time}</span>
-        <span className="text-zinc-300 dark:text-zinc-600">&middot;</span>
-        <span>{activity.pace}</span>
-      </div>
-      <div className="flex items-center justify-between">
-        <RouteSquiggle index={activity.routeIndex} />
-        <div className="flex flex-col items-end gap-0.5">
-          <span className="text-[10.5px] text-zinc-500 dark:text-zinc-500">{activity.date}</span>
-          <span className="text-[10.5px] text-zinc-500 dark:text-zinc-500">
-            {"❤️"} {activity.kudos} kudos
-          </span>
+        <div className="flex-1 min-w-0">
+          <p className="text-[12.5px] font-semibold leading-tight text-zinc-900 dark:text-zinc-100">
+            {activity.title}
+          </p>
+          <p className="mt-0.5 text-[10.5px] text-zinc-400 dark:text-zinc-500">{activity.date}</p>
         </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3 text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
+          <span>{activity.distance}</span>
+          <span className="text-zinc-200 dark:text-zinc-700">/</span>
+          <span>{activity.time}</span>
+          <span className="text-zinc-200 dark:text-zinc-700">/</span>
+          <span>{activity.pace}</span>
+        </div>
+        <RouteSquiggle index={activity.routeIndex} />
       </div>
     </div>
   );
@@ -108,43 +107,48 @@ export function Strava(_: { windowId: string }) {
 
   return (
     <div className="flex h-full flex-col bg-white dark:bg-zinc-900">
-      <div
-        className="shrink-0 border-b border-zinc-200 px-4 py-3 dark:border-zinc-800"
-        style={{ borderTop: "3px solid #FC4C02" }}
-      >
+      {/* Header */}
+      <div className="shrink-0 px-4 pt-4 pb-3">
         <div className="flex items-center gap-3">
           <div
-            className="flex h-9 w-9 items-center justify-center rounded-full text-[13px] font-bold text-white"
-            style={{ background: "#FC4C02" }}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-[14px] font-bold text-white"
+            style={{ background: STRAVA_ORANGE }}
           >
             MC
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <p className="text-[13px] font-semibold text-zinc-900 dark:text-zinc-100">
+              <p className="text-[14px] font-semibold text-zinc-900 dark:text-zinc-100">
                 Mateo Cordier
               </p>
               {isLive && (
-                <span className="flex items-center gap-1 rounded-full bg-green-100 px-1.5 py-0.5 text-[9px] font-semibold text-green-700 dark:bg-green-900/40 dark:text-green-400">
-                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500" />
+                <span className="flex items-center gap-1 rounded-full bg-green-50 px-1.5 py-0.5 text-[9px] font-semibold text-green-600 dark:bg-green-900/30 dark:text-green-400">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500" style={{ animation: "stravaPulse 2s ease-in-out infinite" }} />
                   Live
                 </span>
               )}
             </div>
-            <p className="text-[10.5px] text-zinc-500 dark:text-zinc-400">Lyon, France</p>
+            <p className="text-[11px] text-zinc-400 dark:text-zinc-500">Lyon, France</p>
           </div>
         </div>
+
+        {/* Stats strip */}
         <div
-          className="mt-2.5 flex items-center gap-2 rounded-lg px-3 py-2 text-[11px] font-medium"
-          style={{ background: "rgba(252,76,2,0.08)", color: "#FC4C02" }}
+          className="mt-3 flex items-center gap-2 rounded-xl px-3.5 py-2.5"
+          style={{ background: "rgba(252,76,2,0.06)" }}
         >
-          <span>{"\u{1F525}"}</span>
-          <span>
-            {t("weekSummary")} &mdash; {totalKm} km &middot; {activities.length} activities
+          <span className="text-[13px]">{"\u{1F525}"}</span>
+          <span className="text-[11.5px] font-medium" style={{ color: STRAVA_ORANGE }}>
+            {totalKm} km
+          </span>
+          <span className="text-[10.5px] text-zinc-400 dark:text-zinc-500">
+            &middot; {activities.length} activities
           </span>
         </div>
       </div>
-      <div className="flex-1 space-y-2.5 overflow-y-auto px-3 py-3">
+
+      {/* Activity list */}
+      <div className="flex-1 space-y-2 overflow-y-auto px-3 pb-3">
         {loading ? (
           <>
             <SkeletonCard />
@@ -156,15 +160,26 @@ export function Strava(_: { windowId: string }) {
             <ActivityCard key={activity.id} activity={activity} />
           ))
         )}
+      </div>
+
+      {/* CTA */}
+      <div className="shrink-0 px-3 pb-3">
         <button
           type="button"
           onClick={() => window.open("https://strava.app.link/Cs1xdDaWg3b", "_blank", "noopener,noreferrer")}
           className="w-full rounded-xl py-2.5 text-[12px] font-semibold text-white transition-opacity hover:opacity-90 active:opacity-75"
-          style={{ background: "#FC4C02" }}
+          style={{ background: STRAVA_ORANGE }}
         >
           {t("viewOnStrava")} &rarr;
         </button>
       </div>
+
+      <style>{`
+        @keyframes stravaPulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
+        }
+      `}</style>
     </div>
   );
 }

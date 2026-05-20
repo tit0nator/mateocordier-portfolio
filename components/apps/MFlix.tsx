@@ -90,10 +90,10 @@ export function MFlix({ windowId }: Props) {
             Higgsfield Original
           </p>
 
-          <h2 className="text-[20px] font-black tracking-tight text-white leading-tight drop-shadow">
+          <h2 className="text-[22px] font-black tracking-tight text-white leading-tight drop-shadow-md">
             {featured?.title}
           </h2>
-          <p className="mt-0.5 text-[10.5px] text-white/60 leading-snug max-w-[260px]">
+          <p className="mt-1 text-[10.5px] text-white/50 leading-snug max-w-[260px]">
             {featured?.description?.en?.split(".")[0] ?? "AI motion piece · Hypermotion · 2026"}
           </p>
 

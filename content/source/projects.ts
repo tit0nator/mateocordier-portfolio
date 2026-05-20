@@ -162,21 +162,6 @@ export const PROJECTS: Project[] = [
 
   // ── Decks ────────────────────────────────────────────────────────────
   {
-    id: "smartphone-repair",
-    slug: "smartphone-repair",
-    folder: "decks",
-    title: "Smartphone repair — FR",
-    role: { fr: "Étude de cas anonymisée · 2025", en: "Anonymized case study · 2025" },
-    year: 2025,
-    tags: ["stratégie", "marketing local", "personas", "audit"],
-    description: {
-      fr: "Audit + stratégie 360° pour une enseigne française de réparation smartphones. SWOT, personas, recommandations d'acquisition locale.",
-      en: "Audit + 360 strategy for a French smartphone repair brand. SWOT, personas, local-acquisition recommendations.",
-    },
-    pdfUrl: "/decks/smartphone-repair.pdf",
-    placeholderColor: "#5a5a62",
-  },
-  {
     id: "mon-pitou",
     slug: "mon-pitou",
     folder: "decks",

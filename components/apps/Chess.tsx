@@ -43,16 +43,16 @@ function StatCard({
 }: { label: string; rating?: number; best?: number; record?: ChessRecord }) {
   const t = useTranslations("apps.chess.stats");
   return (
-    <div className="flex flex-col gap-1.5 rounded-xl p-3" style={{ background: "#1e2122" }}>
+    <div className="flex flex-col gap-1.5 rounded-xl p-3.5" style={{ background: "#1e2122" }}>
       <p className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: "#8e9491" }}>{label}</p>
-      <p className="text-[24px] font-bold leading-none text-white">{rating ?? "—"}</p>
+      <p className="text-[26px] font-bold leading-none tracking-tight text-white">{rating ?? "—"}</p>
       {best && best !== rating && (
-        <p className="text-[9.5px]" style={{ color: CHESS_GREEN }}>Best: {best}</p>
+        <p className="text-[9.5px] font-medium" style={{ color: CHESS_GREEN }}>Best: {best}</p>
       )}
       {record && (
         <>
           <WLDBar record={record} />
-          <div className="flex gap-2 text-[9.5px]">
+          <div className="flex gap-2 text-[9.5px] font-medium">
             <span style={{ color: CHESS_GREEN }}>{t("wins")} {record.win}</span>
             <span style={{ color: "#c62828" }}>{t("losses")} {record.loss}</span>
             <span style={{ color: "#616161" }}>{t("draws")} {record.draw}</span>
@@ -65,9 +65,9 @@ function StatCard({
 
 function Skeleton() {
   return (
-    <div className="grid grid-cols-2 gap-2 px-3">
+    <div className="grid grid-cols-2 gap-2.5 px-3.5">
       {[0,1,2,3].map((i) => (
-        <div key={i} className="h-24 animate-pulse rounded-xl" style={{ background: "#1e2122" }} />
+        <div key={i} className="h-28 animate-pulse rounded-xl" style={{ background: "#1e2122" }} />
       ))}
     </div>
   );
@@ -97,60 +97,65 @@ export function Chess(_: { windowId: string }) {
       <div className="shrink-0 px-4 pt-4 pb-3">
         <div className="flex items-center gap-3">
           <div
-            className="flex h-10 w-10 items-center justify-center rounded-full text-[16px] font-black text-white"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-[18px] font-black text-white shadow-lg"
             style={{ background: CHESS_GREEN }}
           >
             ♞
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[16px] font-bold text-white">{USERNAME}</span>
-              <span
-                className="rounded px-1.5 py-0.5 text-[9px] font-bold uppercase text-white"
-                style={{ background: CHESS_GREEN }}
-              >
-                Chess.com
-              </span>
+              <span className="text-[16px] font-bold tracking-tight text-white">{USERNAME}</span>
+              {!error && !loading && (
+                <span className="flex items-center gap-1 rounded-full bg-green-900/30 px-1.5 py-0.5 text-[9px] font-semibold text-green-400">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-500" />
+                  Live
+                </span>
+              )}
             </div>
             <p className="text-[10.5px]" style={{ color: "#8e9491" }}>
-              {error ? `${t("error")} — showing fallback data` : loading ? t("loading") : "Live stats"}
+              Chess.com
             </p>
           </div>
         </div>
       </div>
 
+      {/* Divider */}
+      <div className="mx-4 h-px" style={{ background: "rgba(255,255,255,0.06)" }} />
+
       {/* Stats grid */}
-      {loading && !stats ? (
-        <Skeleton />
-      ) : (
-        <div className="grid grid-cols-2 gap-2 px-3 pb-3">
-          <StatCard
-            label={ts("rapid")}
-            rating={s.chess_rapid?.last?.rating}
-            best={s.chess_rapid?.best?.rating}
-            record={s.chess_rapid?.record}
-          />
-          <StatCard
-            label={ts("blitz")}
-            rating={s.chess_blitz?.last?.rating}
-            best={s.chess_blitz?.best?.rating}
-            record={s.chess_blitz?.record}
-          />
-          <StatCard
-            label={ts("bullet")}
-            rating={s.chess_bullet?.last?.rating}
-            best={s.chess_bullet?.best?.rating}
-            record={s.chess_bullet?.record}
-          />
-          <StatCard
-            label={ts("puzzle")}
-            rating={s.tactics?.highest?.rating}
-          />
-        </div>
-      )}
+      <div className="flex-1 py-3">
+        {loading && !stats ? (
+          <Skeleton />
+        ) : (
+          <div className="grid grid-cols-2 gap-2.5 px-3.5">
+            <StatCard
+              label={ts("rapid")}
+              rating={s.chess_rapid?.last?.rating}
+              best={s.chess_rapid?.best?.rating}
+              record={s.chess_rapid?.record}
+            />
+            <StatCard
+              label={ts("blitz")}
+              rating={s.chess_blitz?.last?.rating}
+              best={s.chess_blitz?.best?.rating}
+              record={s.chess_blitz?.record}
+            />
+            <StatCard
+              label={ts("bullet")}
+              rating={s.chess_bullet?.last?.rating}
+              best={s.chess_bullet?.best?.rating}
+              record={s.chess_bullet?.record}
+            />
+            <StatCard
+              label={ts("puzzle")}
+              rating={s.tactics?.highest?.rating}
+            />
+          </div>
+        )}
+      </div>
 
       {/* CTA */}
-      <div className="shrink-0 px-3 pb-4">
+      <div className="shrink-0 px-3.5 pb-3.5">
         <a
           href={PROFILE_URL}
           target="_blank"
@@ -158,7 +163,7 @@ export function Chess(_: { windowId: string }) {
           className="flex w-full items-center justify-center rounded-xl py-2.5 text-[12px] font-semibold text-white transition-opacity hover:opacity-90"
           style={{ background: CHESS_GREEN }}
         >
-          {t("cta")} →
+          {t("cta")} &rarr;
         </a>
       </div>
     </div>

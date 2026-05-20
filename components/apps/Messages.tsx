@@ -82,11 +82,9 @@ export function Messages(_: { windowId: string }) {
   const wait = (ms: number) =>
     new Promise<void>((resolve) => {
       const id = setTimeout(resolve, ms);
-      // store timeout so we can cancel if locale changes
       return () => clearTimeout(id);
     });
 
-  // Auto-play the intro conversation on mount / locale change
   useEffect(() => {
     cancelRef.current = false;
     setMessages([]);
@@ -98,7 +96,6 @@ export function Messages(_: { windowId: string }) {
     const autoPlayMsgs = t.raw("autoPlay") as AutoPlayMsg[];
 
     async function runAutoPlay() {
-      // Alternate visitor/mateo typing delays by index
       const delays = [800, 600, 700, 1000, 500, 900];
 
       for (let i = 0; i < autoPlayMsgs.length; i++) {
@@ -140,7 +137,6 @@ export function Messages(_: { windowId: string }) {
   async function handleQuestion(item: QAItem, roundIndex: number, isRound2: boolean) {
     if (phase !== "interactive") return;
 
-    // CV download special case
     if (item.answer === "__DOWNLOAD_CV__") {
       const filename = `Resume-Mateo-Cordier-${locale.toUpperCase()}.pdf`;
       const link = document.createElement("a");
@@ -153,12 +149,11 @@ export function Messages(_: { windowId: string }) {
       setMessages((prev) => [
         ...prev,
         { id: `q-${Date.now()}`, sender: "visitor", text: item.question },
-        { id: `a-${Date.now()}`, sender: "mateo", text: locale === "fr" ? "Voilà — le téléchargement devrait démarrer !" : "Here you go — the download should start!" },
+        { id: `a-${Date.now()}`, sender: "mateo", text: locale === "fr" ? "Voila — le telechargement devrait demarrer !" : "Here you go — the download should start!" },
       ]);
       return;
     }
 
-    // Mark round1 answered, unlock round2
     if (!isRound2) {
       setAnsweredRound1((prev) => new Set([...prev, roundIndex]));
       setRound2Unlocked(true);
@@ -166,7 +161,6 @@ export function Messages(_: { windowId: string }) {
 
     setPhase("autoplay");
 
-    // Add visitor question
     setMessages((prev) => [...prev, { id: `q-${Date.now()}`, sender: "visitor", text: item.question }]);
     scrollToBottom();
 
@@ -186,7 +180,6 @@ export function Messages(_: { windowId: string }) {
   const round1 = t.raw("questions.round1") as QAItem[];
   const round2 = t.raw("questions.round2") as QAItem[];
 
-  // Visible chips: unanswered round1 + (if unlocked) round2
   const visibleChips: { item: QAItem; index: number; isRound2: boolean }[] = [
     ...round1
       .map((item, i) => ({ item, index: i, isRound2: false }))
@@ -199,14 +192,17 @@ export function Messages(_: { windowId: string }) {
   return (
     <div className="flex h-full flex-col bg-white dark:bg-zinc-900">
       {/* iMessage-style header */}
-      <div className="flex shrink-0 flex-col items-center gap-0.5 border-b border-black/10 bg-zinc-100/80 px-4 py-2 dark:border-white/10 dark:bg-zinc-800/80">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#007AFF] text-[12px] font-semibold text-white">
+      <div className="flex shrink-0 flex-col items-center gap-0.5 border-b border-black/6 bg-zinc-50/90 px-4 py-2.5 dark:border-white/6 dark:bg-zinc-800/90">
+        <div
+          className="flex h-9 w-9 items-center justify-center rounded-full text-[12px] font-bold text-white shadow-sm"
+          style={{ background: "linear-gradient(135deg, #007AFF, #5856D6)" }}
+        >
           MC
         </div>
-        <p className="text-[12px] font-semibold text-zinc-900 dark:text-zinc-100">
+        <p className="mt-0.5 text-[12px] font-semibold text-zinc-900 dark:text-zinc-100">
           {t("header.name")}
         </p>
-        <p className="text-[10px] text-zinc-500 dark:text-zinc-400">
+        <p className="text-[10px] text-zinc-400 dark:text-zinc-500">
           {t("header.status")}
         </p>
       </div>
@@ -239,12 +235,12 @@ export function Messages(_: { windowId: string }) {
       )}
 
       {/* Fake input bar */}
-      <div className="shrink-0 flex items-center gap-2 border-t border-black/10 bg-zinc-50/80 px-3 py-2 dark:border-white/10 dark:bg-zinc-900/80">
-        <div className="flex-1 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-[12px] text-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-600">
+      <div className="shrink-0 flex items-center gap-2 border-t border-black/6 bg-white/80 px-3 py-2 dark:border-white/6 dark:bg-zinc-900/80">
+        <div className="flex-1 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-[12px] text-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-600">
           {t("inputPlaceholder")}
         </div>
-        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#007AFF]">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+        <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#007AFF] shadow-sm">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M2 12L22 4L14 22L12 14L2 12Z" />
           </svg>
         </div>
