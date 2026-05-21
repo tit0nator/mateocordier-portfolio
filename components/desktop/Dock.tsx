@@ -73,7 +73,7 @@ export function Dock() {
       className="pointer-events-auto absolute bottom-3 left-1/2 z-30 -translate-x-1/2"
     >
       <div
-        className="flex items-end px-1.5 py-1"
+        className="flex items-end px-2.5 py-1.5"
         style={{
           background: "var(--glass-bg)",
           backdropFilter: "blur(var(--glass-blur-heavy))",
@@ -81,7 +81,7 @@ export function Dock() {
           border: "0.5px solid var(--glass-border)",
           borderRadius: "var(--radius-dock)",
           boxShadow: "var(--shadow-dock)",
-          gap: 4,
+          gap: 7,
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}

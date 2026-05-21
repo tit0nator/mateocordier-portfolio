@@ -35,14 +35,10 @@ export function Window({ window: w, title, children }: WindowProps) {
       dragListener={false}
       dragControls={dragControls}
       onDragEnd={() => moveWindow(w.id, { x: x.get(), y: y.get() })}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
-      transition={
-        isFocused
-          ? { type: "spring", stiffness: 300, damping: 25 }
-          : { duration: 0.18 }
-      }
+      initial={{ opacity: 0, scale: 0.88, y: 8 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.94, y: -4 }}
+      transition={{ type: "spring", stiffness: 420, damping: 32 }}
       style={{
         x,
         y,
@@ -67,7 +63,7 @@ export function Window({ window: w, title, children }: WindowProps) {
       {/* Title bar */}
       <div
         onPointerDown={(e) => dragControls.start(e)}
-        className={`relative flex cursor-grab items-center gap-2 border-b px-3 select-none active:cursor-grabbing ${
+        className={`relative flex cursor-grab items-center border-b px-3 select-none active:cursor-grabbing ${
           isFocused
             ? "border-black/8 dark:border-white/8"
             : "border-black/5 dark:border-white/5"
@@ -77,27 +73,33 @@ export function Window({ window: w, title, children }: WindowProps) {
           background: "var(--glass-bg)",
           backdropFilter: "blur(var(--glass-blur-light))",
           WebkitBackdropFilter: "blur(var(--glass-blur-light))",
-          opacity: isFocused ? 1 : 0.7,
+          opacity: isFocused ? 1 : 0.75,
         }}
       >
-        {/* Glass highlight on focused title bar top edge */}
-        {isFocused && (
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0"
-            style={{ height: 1, background: "var(--glass-highlight)" }}
-          />
-        )}
+        {/* Glass highlight on title bar top edge */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0"
+          style={{ height: 1, background: "var(--glass-highlight)", opacity: isFocused ? 1 : 0.4 }}
+        />
+        {/* Traffic lights -- left */}
         <WindowChrome onClose={() => closeWindow(w.id)} isFocused={isFocused} />
-        <span className="ml-1 truncate text-[12px] font-medium text-zinc-700 dark:text-zinc-200">
+        {/* Title -- centered absolutely so traffic lights do not push it */}
+        <span
+          className="pointer-events-none absolute inset-x-0 text-center truncate px-16 text-[12px] font-medium"
+          style={{ opacity: isFocused ? 0.75 : 0.4, color: "var(--foreground)" }}
+        >
           {title}
         </span>
       </div>
 
       {/* Content area */}
       <div
-        className="overflow-auto bg-white/95 dark:bg-zinc-900/95"
-        style={{ height: "calc(100% - var(--titlebar-height))" }}
+        className={`overflow-auto transition-opacity duration-200 ${isFocused ? "opacity-100" : "opacity-95"}`}
+        style={{
+          height: "calc(100% - var(--titlebar-height))",
+          background: "var(--window-content-bg, rgba(255,255,255,0.97))",
+        }}
       >
         {children}
       </div>
@@ -114,11 +116,8 @@ function WindowChrome({
 }) {
   const stop = (e: React.PointerEvent) => e.stopPropagation();
   const colorClose = isFocused ? "#ff5f57" : "#d4d4d8";
-  const colorMin = isFocused ? "#febc2e" : "#d4d4d8";
-  const colorMax = isFocused ? "#28c840" : "#d4d4d8";
-
-  // In dark mode, unfocused buttons are darker
-  const unfocusedDark = "#52525b";
+  const colorMin   = isFocused ? "#febc2e" : "#d4d4d8";
+  const colorMax   = isFocused ? "#28c840" : "#d4d4d8";
 
   return (
     <div className="group/chrome flex items-center gap-2">

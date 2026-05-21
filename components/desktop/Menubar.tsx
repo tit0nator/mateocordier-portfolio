@@ -9,12 +9,14 @@ import { useWindowStore } from "@/lib/store";
 import { APP_REGISTRY } from "@/components/apps/registry";
 
 function formatLocalTime(date: Date) {
-  return new Intl.DateTimeFormat("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const weekday = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: tz }).format(date);
+  const month   = new Intl.DateTimeFormat("en-US", { month: "short",   timeZone: tz }).format(date);
+  const day     = new Intl.DateTimeFormat("en-US", { day: "numeric",   timeZone: tz }).format(date);
+  const time    = new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit", minute: "2-digit", hour12: false, timeZone: tz,
   }).format(date);
+  return weekday + " " + month + " " + day + "  " + time;
 }
 
 function AppleLogo() {
@@ -72,7 +74,6 @@ export function Menubar() {
 
   const time = now ? formatLocalTime(now) : "--:--";
 
-  // Resolve active app name from focused window
   const focusedApp = focusedId ? windows.find((w) => w.id === focusedId)?.app : null;
   const activeAppName = focusedApp && APP_REGISTRY[focusedApp]
     ? tDock(focusedApp as Parameters<typeof tDock>[0])
@@ -82,9 +83,11 @@ export function Menubar() {
     router.replace(pathname, { locale: locale === "fr" ? "en" : "fr" });
   }
 
+  const menuItem = "px-2 py-1 rounded cursor-default hover:bg-black/8 dark:hover:bg-white/10 transition-colors";
+
   return (
     <header
-      className="absolute inset-x-0 top-0 z-30 flex items-center gap-3 px-3 text-[12px] select-none"
+      className="absolute inset-x-0 top-0 z-30 flex items-center text-[12px] select-none"
       style={{
         height: "var(--menubar-height)",
         background: "var(--glass-bg)",
@@ -95,46 +98,50 @@ export function Menubar() {
       }}
     >
       {/* Left cluster */}
-      <div className="flex items-center gap-3">
-        <AppleLogo />
-        <span className="font-semibold tracking-tight">{t("ownerName")}</span>
-        <span className="font-semibold">{activeAppName}</span>
-        <span className="opacity-70">File</span>
-        <span className="opacity-70">Edit</span>
-        <span className="opacity-70">View</span>
+      <div className="flex items-center gap-0.5 pl-1">
+        <button
+          type="button"
+          aria-label="Apple menu"
+          className={menuItem + " px-2.5"}
+        >
+          <AppleLogo />
+        </button>
+        <span className={"font-semibold tracking-tight " + menuItem}>
+          {activeAppName}
+        </span>
+        <span className={"opacity-70 " + menuItem}>File</span>
+        <span className={"opacity-70 " + menuItem}>Edit</span>
+        <span className={"opacity-70 " + menuItem}>View</span>
+        <span className={"opacity-70 " + menuItem}>Window</span>
+        <span className={"opacity-70 " + menuItem}>Help</span>
       </div>
 
       {/* Right cluster */}
-      <div className="ml-auto flex items-center gap-2.5 opacity-90">
-        <WifiIcon />
-
-        <div className="flex items-center gap-1">
+      <div className="ml-auto flex items-center pr-1 opacity-85">
+        <button type="button" className={menuItem + " flex items-center"}>
+          <WifiIcon />
+        </button>
+        <button type="button" className={menuItem + " flex items-center gap-1"}>
           <BatteryIcon />
           <span className="text-[11px] tabular-nums">100%</span>
-        </div>
-
-        {/* Dark mode toggle */}
+        </button>
         <button
           type="button"
           aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
           onClick={toggle}
-          className="flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
+          className={menuItem + " flex items-center"}
         >
           {isDark ? <Sun size={12} aria-hidden="true" /> : <Moon size={12} aria-hidden="true" />}
         </button>
-
-        {/* Locale toggle */}
         <button
           type="button"
           aria-label="Switch language"
           onClick={switchLocale}
-          className="rounded px-1.5 py-0.5 text-[11px] font-semibold opacity-70 hover:opacity-100 hover:bg-black/8 dark:hover:bg-white/10 transition-all"
+          className={menuItem + " text-[11px] font-semibold"}
         >
           {locale === "fr" ? "EN" : "FR"}
         </button>
-
-        {/* Clock */}
-        <span className="tabular-nums text-[11px]">{time}</span>
+        <span className={"tabular-nums text-[11px] font-medium " + menuItem}>{time}</span>
       </div>
     </header>
   );

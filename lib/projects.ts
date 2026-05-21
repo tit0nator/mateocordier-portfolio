@@ -46,6 +46,7 @@ export const PROJECTS: Project[] = [
     },
     externalUrl: "https://bodyspirit-8ukwc26w.manus.space",
     hero: "/projects/body-spirit/hero.jpg",
+    videoUrl: "/projects/body-spirit/video.mp4",
     placeholderColor: "#c75c4a",
   },
   {
@@ -62,6 +63,7 @@ export const PROJECTS: Project[] = [
     },
     externalUrl: "https://www.lesurge.com",
     hero: "/projects/surge/hero.jpg",
+    videoUrl: "/projects/surge/video.mp4",
   },
   {
     id: "reserve",
@@ -77,6 +79,7 @@ export const PROJECTS: Project[] = [
     },
     externalUrl: "https://reserveepic-treosgst.manus.space",
     hero: "/projects/reserve/hero.jpg",
+    videoUrl: "/projects/reserve/video.mp4",
     assets: [
       "/projects/reserve/02-ramune.jpg",
       "/projects/reserve/03-takis.jpg",
@@ -160,7 +163,38 @@ export const PROJECTS: Project[] = [
     placeholderColor: "#3b6e3d",
   },
 
-  // ── Decks ────────────────────────────────────────────────────────────
+  {
+    id: "pabs-1",
+    slug: "pabs-1",
+    folder: "lab",
+    title: "The Bear of Main St",
+    role: { fr: "TitoFlix · Hypermotion · 2026", en: "TitoFlix · Hypermotion · 2026" },
+    year: 2026,
+    tags: ["IA motion", "TitoFlix"],
+    description: {
+      fr: "Piece motion IA — rendu TitoFlix.",
+      en: "AI motion piece — rendered on TitoFlix.",
+    },
+    videoUrl: "/lab/pabs-1.mp4",
+    placeholderColor: "#2b1a0e",
+  },
+  {
+    id: "pabs-2",
+    slug: "pabs-2",
+    folder: "lab",
+    title: "Thank You",
+    role: { fr: "TitoFlix · Hypermotion · 2026", en: "TitoFlix · Hypermotion · 2026" },
+    year: 2026,
+    tags: ["IA motion", "TitoFlix"],
+    description: {
+      fr: "Piece motion IA — rendu TitoFlix.",
+      en: "AI motion piece — rendered on TitoFlix.",
+    },
+    videoUrl: "/lab/pabs-2.mp4",
+    placeholderColor: "#1a0e2b",
+  },
+
+  // -- Decks ────────────────────────────────────────────────────────────
   {
     id: "mon-pitou",
     slug: "mon-pitou",
